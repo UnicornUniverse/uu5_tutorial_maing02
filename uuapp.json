@@ -1,0 +1,17 @@
+{
+  "product": "uu_uu5_tutorial_maing02",
+  "version": "0.1.0",
+  "license": "License Commercial",
+  "description": {
+    "en": "",
+    "cs": ""
+  },
+  "devkit": {
+    "development": {
+      "appBoxLocationUri": "----- VALUE REQUIRED -----",
+      "appDeploymentUri": null
+    }
+  },
+  "uu5_tutorial_maing02-hi": {},
+  "uu5_tutorial_maing02-server": {}
+}
