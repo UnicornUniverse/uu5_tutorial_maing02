@@ -44,7 +44,7 @@ const RouteBar = createVisualComponent({
     //@@viewOn:render
     return (
       <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-        <Plus4U5App.RouteHeader title="uu5 Get Started" />
+        <Plus4U5App.RouteHeader title="Lesson 03 - New project" />
       </Plus4U5App.RouteBar>
     );
     //@@viewOff:render

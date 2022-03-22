@@ -11,6 +11,91 @@
         "httpMethod": "GET",
         "type": "UVE"
       },
+      "tutorial/new-project": {
+        "realization": "03-new-project/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/hello-world": {
+        "realization": "04-hello-world/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/component": {
+        "realization": "05-component/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/properties": {
+        "realization": "06-properties/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/state": {
+        "realization": "07-state/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/route": {
+        "realization": "08-route/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/effect": {
+        "realization": "09-effect/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/responsivity": {
+        "realization": "10-responsivity/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/cascading-styles": {
+        "realization": "11-cascading-styles/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/server-calls": {
+        "realization": "12-server-calls/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/context": {
+        "realization": "13-context/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/session": {
+        "realization": "14-session/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/multilingualism": {
+        "realization": "15-multilingualism/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/modal": {
+        "realization": "16-modal/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/forms": {
+        "realization": "17-forms/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/tiles": {
+        "realization": "18-tiles/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/dynamic-rendering": {
+        "realization": "19-dynamic-rendering/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
       "sys/uuAppWorkspace/initUve": {
         "realization": "index.html",
         "httpMethod": "GET",
