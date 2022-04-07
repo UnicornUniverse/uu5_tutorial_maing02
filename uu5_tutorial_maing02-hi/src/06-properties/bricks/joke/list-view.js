@@ -13,8 +13,8 @@ const ListView = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     jokeList: PropTypes.array.isRequired,
-    onUpdate: UU5.PropTypes.func,
-    onDelete: UU5.PropTypes.func,
+    onUpdate: PropTypes.func,
+    onDelete: PropTypes.func,
   },
   //@@viewOff:propTypes
 
