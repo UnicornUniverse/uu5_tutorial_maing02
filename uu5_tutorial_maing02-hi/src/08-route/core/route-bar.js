@@ -34,6 +34,7 @@ const RouteBar = createVisualComponent({
 
     const appActionList = [
       { children: <Lsi lsi={LSI.menu.home} />, onClick: () => setRoute("home") },
+      { children: <Lsi lsi={LSI.menu.jokes} />, onClick: () => setRoute("jokes") },
       { children: <Lsi lsi={LSI.menu.about} />, onClick: () => setRoute("about"), collapsed: true },
     ];
     //@@viewOff:private
@@ -44,7 +45,7 @@ const RouteBar = createVisualComponent({
     //@@viewOn:render
     return (
       <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-        <Plus4U5App.RouteHeader title="Lesson 07 - State" />
+        <Plus4U5App.RouteHeader title="Lesson 08 - Route" />
       </Plus4U5App.RouteBar>
     );
     //@@viewOff:render
