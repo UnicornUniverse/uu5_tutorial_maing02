@@ -1,6 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils } from "uu5g05";
-import { Box, Text, Line, Button, DateTime } from "uu5g05-elements";
+import { createVisualComponent, PropTypes, Utils, useEffect } from "uu5g05";
+import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -83,24 +83,14 @@ const Tile = createVisualComponent({
 
   //@@viewOn:propTypes
   propTypes: {
-    joke: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      text: PropTypes.string,
-      imageUrl: PropTypes.string,
-      averageRating: PropTypes.number.isRequired,
-      uuIdentityName: PropTypes.string.isRequired,
-      sys: PropTypes.shape({
-        cts: PropTypes.string,
-      }),
-    }).isRequired,
-    onUpdate: UU5.PropTypes.func,
-    onDelete: UU5.PropTypes.func,
+    jokeDataObject: PropTypes.object.isRequired,
+    onUpdate: PropTypes.func,
+    onDelete: PropTypes.func,
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
-    joke: null,
     onUpdate: () => {},
     onDelete: () => {},
   },
@@ -108,46 +98,72 @@ const Tile = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    function handleDelete(event) {
-      props.onDelete(new Utils.Event(props.joke, event));
+    useEffect(() => {
+      if (
+        props.jokeDataObject.data.image &&
+        !props.jokeDataObject.data.imageUrl &&
+        props.jokeDataObject.state === "ready" &&
+        props.jokeDataObject.handlerMap?.getImage
+      ) {
+        props.jokeDataObject.handlerMap.getImage(props.jokeDataObject.data).catch((error) => console.error(error));
+      }
+    }, [props.jokeDataObject]);
+
+    function handleDelete() {
+      props.onDelete(props.jokeDataObject);
     }
 
-    function handleUpdate(event) {
-      props.onUpdate(new Utils.Event(props.joke, event));
+    function handleUpdate() {
+      props.onUpdate(props.jokeDataObject);
     }
     //@@viewOff:private
 
     //@@viewOn:render
     const [elementProps] = Utils.VisualComponent.splitProps(props, Css.main());
+    const joke = props.jokeDataObject.data;
+    const isActionDisabled = props.jokeDataObject.state === "pending";
 
     return (
       <Box {...elementProps}>
         <Text category="interface" segment="title" type="minor" colorScheme="building" className={Css.header()}>
-          {props.joke.name}
+          {joke.name}
         </Text>
 
-        <div className={Css.content(props.joke.image)}>
-          {props.joke.text && !props.joke.image && (
+        <div className={Css.content(joke.image)}>
+          {joke.text && !joke.image && (
             <Text category="interface" segment="content" type="medium" colorScheme="building" className={Css.text()}>
-              {props.joke.text}
+              {joke.text}
             </Text>
           )}
-          {props.joke.imageUrl && <img src={props.joke.imageUrl} alt={props.joke.name} className={Css.image()} />}
+          {joke.imageUrl && <img src={joke.imageUrl} alt={joke.name} className={Css.image()} />}
+          {joke.image && !joke.imageUrl && <Pending size="xl" />}
         </div>
 
         <Line significance="subdued" />
 
-        <InfoLine>{props.joke.uuIdentityName}</InfoLine>
+        <InfoLine>{joke.uuIdentityName}</InfoLine>
 
         <InfoLine>
-          <DateTime value={props.joke.sys.cts} dateFormat="short" timeFormat="none" />
+          <DateTime value={joke.sys.cts} dateFormat="short" timeFormat="none" />
         </InfoLine>
 
         <Box significance="distinct" className={Css.footer()}>
-          {`Average rating: ${props.joke.averageRating} / 5`}
+          {`Average rating: ${joke.averageRating} / 5`}
           <div>
-            <Button icon="mdi-pencil" onClick={handleUpdate} significance="subdued" tooltip="Update" />
-            <Button icon="mdi-delete" onClick={handleDelete} significance="subdued" tooltip="Delete" />
+            <Button
+              icon="mdi-pencil"
+              onClick={handleUpdate}
+              significance="subdued"
+              tooltip="Update"
+              disabled={isActionDisabled}
+            />
+            <Button
+              icon="mdi-delete"
+              onClick={handleDelete}
+              significance="subdued"
+              tooltip="Delete"
+              disabled={isActionDisabled}
+            />
           </div>
         </Box>
       </Box>

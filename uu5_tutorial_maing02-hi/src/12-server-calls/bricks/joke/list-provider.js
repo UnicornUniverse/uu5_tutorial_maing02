@@ -1,34 +1,8 @@
 //@@viewOn:imports
-import { createComponent, Utils, useState } from "uu5g05";
+import { createComponent, useDataList, useEffect, useRef } from "uu5g05";
 import Config from "./config/config";
+import Calls from "calls";
 //@@viewOff:imports
-
-const initialJokeList = [
-  {
-    id: Utils.String.generateId(),
-    name: "Bunny ate the wedding ring!",
-    text: "Why did the bunny eat the wedding ring? Because he heard it was 18 carrots!",
-    averageRating: 4,
-    uuIdentityName: "John Smith",
-    sys: { cts: "2022-03-17T09:48:38.990Z" },
-  },
-  {
-    id: Utils.String.generateId(),
-    name: "F5",
-    text: "I love the F5 key. It´s just so refreshing.",
-    averageRating: 3,
-    uuIdentityName: "Harry Potter",
-    sys: { cts: "2022-02-14T10:48:38.990Z" },
-  },
-  {
-    id: Utils.String.generateId(),
-    name: "Random image",
-    imageUrl: "https://placeimg.com/640/320/any",
-    averageRating: 1,
-    uuIdentityName: "Bart Simpson",
-    sys: { cts: "2021-02-14T10:48:38.990Z" },
-  },
-];
 
 export const ListProvider = createComponent({
   //@@viewOn:statics
@@ -45,35 +19,68 @@ export const ListProvider = createComponent({
 
   render(props) {
     //@@viewOn:private
-    const [jokeList, setJokeList] = useState(initialJokeList);
+    const jokeDataList = useDataList({
+      handlerMap: {
+        load: handleLoad,
+        loadNext: handleLoadNext,
+        create: handleCreate,
+      },
+      itemHandlerMap: {
+        update: handleUpdate,
+        delete: handleDelete,
+        getImage: handleGetImage,
+      },
+    });
 
-    function remove(joke) {
-      setJokeList((prevJokeList) => prevJokeList.filter((item) => item.id !== joke.id));
+    const imageUrlListRef = useRef([]);
+
+    function handleLoad() {
+      const dtoIn = { pageInfo: { pageSize: 3 } };
+      return Calls.Joke.list(dtoIn);
     }
 
-    function create(values) {
-      const joke = {
-        ...values,
-        id: Utils.String.generateId(),
-        averageRating: Math.round(Math.random() * 5), // <0, 5>
-        uuIdentityName: "Gerald of Rivia",
-        sys: {
-          cts: new Date().toISOString(),
-        },
-      };
-
-      setJokeList((prevJokeList) => [...prevJokeList, joke]);
-      return joke;
+    function handleLoadNext(pageInfo) {
+      const dtoIn = { pageInfo };
+      return Calls.Joke.list(dtoIn);
     }
 
-    function update() {
+    function handleCreate(values) {
+      return Calls.Joke.create(values);
+    }
+
+    async function handleUpdate() {
       throw new Error("Joke update is not implemented yet.");
     }
+
+    function handleDelete(joke) {
+      const dtoIn = { id: joke.id };
+      return Calls.Joke.delete(dtoIn, props.baseUri);
+    }
+
+    async function handleGetImage(joke) {
+      const dtoIn = { code: joke.image };
+      const imageFile = await Calls.Joke.getImage(dtoIn);
+      const imageUrl = generateAndRegisterImageUrl(imageFile);
+      return { ...joke, imageFile, imageUrl };
+    }
+
+    function generateAndRegisterImageUrl(imageFile) {
+      const imageUrl = URL.createObjectURL(imageFile);
+      imageUrlListRef.current.push(imageUrl);
+      return imageUrl;
+    }
+
+    useEffect(() => {
+      // We don't use it to store reference on another React component
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+      return () => imageUrlListRef.current.forEach((url) => URL.revokeObjectURL(url));
+      // We want to trigger this effect only once.
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:render
-    const value = { jokeList, remove, update, create };
-    return typeof props.children === "function" ? props.children(value) : props.children;
+    return typeof props.children === "function" ? props.children(jokeDataList) : props.children;
     //@@viewOff:render
   },
 });

@@ -5,6 +5,12 @@ import CreateForm from "./create-form.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
+//@@viewOn:css
+const Css = {
+  button: () => Config.Css.css({ display: "block", margin: "0px auto" }),
+};
+//@@viewOff:css
+
 //@@viewOn:constants
 const Mode = {
   BUTTON: "BUTTON",
@@ -15,7 +21,7 @@ const Mode = {
 //@@viewOn:helpers
 function CreateButton(props) {
   return (
-    <Button {...props} colorScheme="primary" significance="highlighted">
+    <Button {...props} colorScheme="primary" significance="highlighted" className={Css.button()}>
       Create joke
     </Button>
   );
@@ -41,17 +47,18 @@ const CreateView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addAlert } = useAlertBus();
     const [mode, setMode] = useState(Mode.BUTTON);
+    const { addAlert } = useAlertBus();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
       let joke;
 
       try {
-        joke = props.onCreate(event.data.value);
+        joke = await props.jokeDataList.handlerMap.create(event.data.value);
+        props.jokeDataList.handlerMap.load();
       } catch (error) {
-        // We pass Error.Message instance to the Uu5Forms.Form that shows alert
-        throw new Utils.Error.Message("Joke create failed!", error);
+        console.error(error);
+        showError(error, "Joke creation failed!");
       }
 
       addAlert({
@@ -65,14 +72,19 @@ const CreateView = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:render
-    const [elementProps] = Utils.VisualComponent.splitProps(props);
+    const attrs = Utils.VisualComponent.getAttrs(props);
+    let content;
 
     switch (mode) {
       case Mode.BUTTON:
-        return <CreateButton {...elementProps} onClick={() => setMode(Mode.FORM)} />;
+        content = <CreateButton onClick={() => setMode(Mode.FORM)} />;
+        break;
       default:
-        return <CreateForm {...elementProps} onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} />;
+        content = <CreateForm onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} />;
+        break;
     }
+
+    return <div {...attrs}>{content}</div>;
     //@@viewOff:render
   },
 });

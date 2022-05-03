@@ -7,11 +7,21 @@ const appAssetsBaseUri = (
 ).replace(/^(.*)\/.*$/, "$1/"); // strip what's after last slash
 
 Calls.call = (method, url, dtoIn) => {
-  let mockUrl = (process.env.MOCK_DATA_BASE_URI || appAssetsBaseUri) + "mock/data/" + url + ".json";
-  let responsePromise = (async () => {
-    let response = await fetch(mockUrl);
-    return await response.json();
-  })();
+  let responsePromise;
+
+  if (url === "uu-app-binarystore/getBinaryData") {
+    responsePromise = (async () => {
+      const response = await fetch("http://placekitten.com/600/600");
+      return await response.blob();
+    })();
+  } else {
+    const mockUrl = (process.env.MOCK_DATA_BASE_URI || appAssetsBaseUri) + "mock/data/" + url + ".json";
+    responsePromise = (async () => {
+      let response = await fetch(mockUrl);
+      return await response.json();
+    })();
+  }
+
   return dtoIn != null ? responsePromise.then(dtoIn.done, dtoIn.fail) : responsePromise;
 };
 
