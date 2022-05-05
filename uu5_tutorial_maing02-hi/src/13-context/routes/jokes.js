@@ -7,6 +7,7 @@ import ListProvider from "../bricks/joke/list-provider";
 import ListTitle from "../bricks/joke/list-title";
 import ListView from "../bricks/joke/list-view";
 import CreateView from "../bricks/joke/create-view";
+import { useJokes } from "../bricks/jokes/context";
 //@@viewOff:imports
 
 //@@viewOn:css
@@ -22,6 +23,10 @@ let Jokes = createVisualComponent({
   //@@viewOff:statics
 
   render() {
+    //@@viewOn:private
+    const jokesDataObject = useJokes();
+    //@@viewOff:private
+
     //@@viewOn:render
     return (
       <>
@@ -31,7 +36,7 @@ let Jokes = createVisualComponent({
             <RouteController routeDataObject={jokeDataList}>
               <div className={Css.container()}>
                 <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
-                <ListView jokeDataList={jokeDataList} />
+                <ListView jokeDataList={jokeDataList} categoryList={jokesDataObject.data.data.categoryList} />
                 <ListTitle jokeList={jokeDataList.data} />
               </div>
             </RouteController>

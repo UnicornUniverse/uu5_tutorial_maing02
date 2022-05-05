@@ -58,6 +58,13 @@ const Calls = {
     },
   },
 
+  Jokes: {
+    load(dtoIn, baseUri) {
+      const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load", baseUri);
+      return Calls.call("get", commandUri, dtoIn);
+    },
+  },
+
   getCommandUri(useCase) {
     return CALLS_BASE_URI + useCase.replace(/^\/+/, "");
   },

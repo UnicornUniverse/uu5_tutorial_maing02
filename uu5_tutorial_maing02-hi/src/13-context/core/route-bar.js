@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Lsi, useRoute } from "uu5g05";
+import { createVisualComponent, Lsi, useRoute, useContext } from "uu5g05";
 import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
+import JokesContext from "../bricks/jokes/context";
 import LSI from "../config/lsi.js";
 //@@viewOff:imports
 
@@ -43,9 +44,11 @@ const RouteBar = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    const jokesDataObject = useContext(JokesContext);
+
     return (
       <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-        <Plus4U5App.RouteHeader title="Lesson 13 - Context" />
+        <Plus4U5App.RouteHeader title={"Lesson 19 - Context - " + jokesDataObject.data.data.name} />
       </Plus4U5App.RouteBar>
     );
     //@@viewOff:render

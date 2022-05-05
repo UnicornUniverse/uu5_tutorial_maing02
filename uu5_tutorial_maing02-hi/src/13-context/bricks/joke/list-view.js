@@ -20,11 +20,14 @@ const ListView = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     jokeDataList: PropTypes.object.isRequired,
+    categoryList: PropTypes.array,
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
-  defaultProps: {},
+  defaultProps: {
+    categoryList: [],
+  },
   //@@viewOff:defaultProps
 
   render(props) {
@@ -87,6 +90,7 @@ const ListView = createVisualComponent({
             onDelete={handleDelete}
             onUpdate={handleUpdate}
             className={Css.tile()}
+            categoryList={props.categoryList}
           />
         ))}
         <div className={Css.buttonArea()}>

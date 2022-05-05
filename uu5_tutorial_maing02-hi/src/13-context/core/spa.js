@@ -1,10 +1,11 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils } from "uu5g05";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App from "uu_plus4u5g02-app";
+import Plus4U5App, { SpaPending } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
+import JokesProvider from "../bricks/jokes/provider.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -41,7 +42,15 @@ const Spa = createVisualComponent({
     //@@viewOn:render
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+        <JokesProvider>
+          {(jokesDataObject) => (
+            <>
+              {jokesDataObject.state === "pendingNoData" && <SpaPending />}
+              {jokesDataObject.state === "errorNoData" && <Error error={jokesDataObject.errorData} />}
+              {["ready", "pending", "error"].includes(jokesDataObject.state) && <Plus4U5App.Spa routeMap={ROUTE_MAP} />}
+            </>
+          )}
+        </JokesProvider>
       </Plus4U5.SpaProvider>
     );
     //@@viewOff:render

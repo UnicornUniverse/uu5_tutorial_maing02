@@ -84,6 +84,7 @@ const Tile = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     jokeDataObject: PropTypes.object.isRequired,
+    categoryList: PropTypes.array,
     onUpdate: PropTypes.func,
     onDelete: PropTypes.func,
   },
@@ -91,6 +92,7 @@ const Tile = createVisualComponent({
 
   //@@viewOn:defaultProps
   defaultProps: {
+    categoryList: [],
     onUpdate: () => {},
     onDelete: () => {},
   },
@@ -116,6 +118,19 @@ const Tile = createVisualComponent({
     function handleUpdate() {
       props.onUpdate(props.jokeDataObject);
     }
+
+    function buildCategoryNames(categoryIdList) {
+      // for faster lookup
+      let categoryIds = new Set(categoryIdList);
+      return props.categoryList
+        .reduce((acc, category) => {
+          if (categoryIds.has(category.id)) {
+            acc.push(category.name);
+          }
+          return acc;
+        }, [])
+        .join(", ");
+    }
     //@@viewOff:private
 
     //@@viewOn:render
@@ -140,6 +155,8 @@ const Tile = createVisualComponent({
         </div>
 
         <Line significance="subdued" />
+
+        {joke.categoryIdList?.length > 0 && <InfoLine>{buildCategoryNames(joke.categoryIdList)}</InfoLine>}
 
         <InfoLine>{joke.uuIdentityName}</InfoLine>
 
