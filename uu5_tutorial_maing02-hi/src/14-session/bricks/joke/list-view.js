@@ -20,13 +20,16 @@ const ListView = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     jokeDataList: PropTypes.object.isRequired,
+    identity: PropTypes.object.isRequired,
     categoryList: PropTypes.array,
+    profileList: PropTypes.array,
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
     categoryList: [],
+    profileList: [],
   },
   //@@viewOff:defaultProps
 
@@ -87,6 +90,8 @@ const ListView = createVisualComponent({
           <Tile
             key={item.data.id}
             jokeDataObject={item}
+            profileList={props.profileList}
+            identity={props.identity}
             onDelete={handleDelete}
             onUpdate={handleUpdate}
             className={Css.tile()}

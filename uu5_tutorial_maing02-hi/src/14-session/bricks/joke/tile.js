@@ -74,6 +74,13 @@ function InfoLine({ children }) {
     </Text>
   );
 }
+
+function hasManagePermission(joke, identity, profileList) {
+  const isAuthority = profileList.includes("Authorities");
+  const isExecutive = profileList.includes("Executives");
+  const isOwner = joke.uuIdentity === identity.uuIdentity;
+  return isAuthority || (isExecutive && isOwner);
+}
 //@@viewOff:helpers
 
 const Tile = createVisualComponent({
@@ -136,6 +143,7 @@ const Tile = createVisualComponent({
     //@@viewOn:render
     const [elementProps] = Utils.VisualComponent.splitProps(props, Css.main());
     const joke = props.jokeDataObject.data;
+    const canManage = hasManagePermission(joke, props.identity, props.profileList);
     const isActionDisabled = props.jokeDataObject.state === "pending";
 
     return (
@@ -166,22 +174,24 @@ const Tile = createVisualComponent({
 
         <Box significance="distinct" className={Css.footer()}>
           {`Average rating: ${joke.averageRating} / 5`}
-          <div>
-            <Button
-              icon="mdi-pencil"
-              onClick={handleUpdate}
-              significance="subdued"
-              tooltip="Update"
-              disabled={isActionDisabled}
-            />
-            <Button
-              icon="mdi-delete"
-              onClick={handleDelete}
-              significance="subdued"
-              tooltip="Delete"
-              disabled={isActionDisabled}
-            />
-          </div>
+          {canManage && (
+            <div>
+              <Button
+                icon="mdi-pencil"
+                onClick={handleUpdate}
+                significance="subdued"
+                tooltip="Update"
+                disabled={isActionDisabled}
+              />
+              <Button
+                icon="mdi-delete"
+                onClick={handleDelete}
+                significance="subdued"
+                tooltip="Delete"
+                disabled={isActionDisabled}
+              />
+            </div>
+          )}
         </Box>
       </Box>
     );

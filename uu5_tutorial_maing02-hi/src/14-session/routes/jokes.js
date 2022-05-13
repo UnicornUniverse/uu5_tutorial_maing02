@@ -1,6 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent } from "uu5g05";
-import { useSubAppData } from "uu_plus4u5g02";
+import { createVisualComponent, useSession } from "uu5g05";
+import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import { RouteController } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar";
@@ -25,6 +25,11 @@ let Jokes = createVisualComponent({
   render() {
     //@@viewOn:private
     const subAppDataObject = useSubAppData();
+    const systemDataObject = useSystemData();
+    const { identity } = useSession();
+
+    const profileList = systemDataObject.data.profileData.uuIdentityProfileList;
+    const canCreate = profileList.includes("Authorities") || profileList.includes("Executives");
     //@@viewOff:private
 
     //@@viewOn:render
@@ -35,8 +40,13 @@ let Jokes = createVisualComponent({
           {(jokeDataList) => (
             <RouteController routeDataObject={jokeDataList}>
               <div className={Css.container()}>
-                <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
-                <ListView jokeDataList={jokeDataList} categoryList={subAppDataObject.data.categoryList} />
+                {canCreate && <CreateView jokeDataList={jokeDataList} className={Css.createView()} />}
+                <ListView
+                  jokeDataList={jokeDataList}
+                  categoryList={subAppDataObject.data.categoryList}
+                  profileList={profileList}
+                  identity={identity}
+                />
                 <ListTitle jokeList={jokeDataList.data} />
               </div>
             </RouteController>
