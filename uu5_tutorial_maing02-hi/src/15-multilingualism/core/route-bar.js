@@ -1,10 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, Lsi, useRoute } from "uu5g05";
+import { createVisualComponent, Utils, useLsi, useRoute } from "uu5g05";
 import { useSubAppData } from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
 
+import importLsi from "../lsi/import-lsi";
 import Config from "./config/config.js";
-import LSI from "../config/lsi.js";
 //@@viewOff:imports
 
 const RouteBar = createVisualComponent({
@@ -24,18 +24,19 @@ const RouteBar = createVisualComponent({
     //@@viewOn:private
     const [, setRoute] = useRoute();
     const subAppDataObject = useSubAppData();
+    const lsi = useLsi(importLsi, [RouteBar.uu5Tag]);
 
     const appActionList = [
-      { children: <Lsi lsi={LSI.menu.home} />, onClick: () => setRoute("home") },
-      { children: <Lsi lsi={LSI.menu.jokes} />, onClick: () => setRoute("jokes") },
-      { children: <Lsi lsi={LSI.menu.about} />, onClick: () => setRoute("about"), collapsed: true },
+      { children: lsi.home, onClick: () => setRoute("home") },
+      { children: lsi.jokes, onClick: () => setRoute("jokes") },
+      { children: lsi.about, onClick: () => setRoute("about"), collapsed: true },
     ];
     //@@viewOff:private
 
     //@@viewOn:render
     return (
       <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-        <Plus4U5App.RouteHeader title={"Lesson 15 - Multilingualism - " + subAppDataObject.data.name} />
+        <Plus4U5App.RouteHeader title={Utils.String.format(lsi.title, subAppDataObject.data.name)} />
       </Plus4U5App.RouteBar>
     );
     //@@viewOff:render

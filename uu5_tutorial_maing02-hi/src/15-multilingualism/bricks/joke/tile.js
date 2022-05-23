@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useEffect } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useEffect, useLsi } from "uu5g05";
 import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -107,6 +108,8 @@ const Tile = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const lsi = useLsi(importLsi, [Tile.uu5Tag]);
+
     useEffect(() => {
       if (
         props.jokeDataObject.data.image &&
@@ -173,21 +176,21 @@ const Tile = createVisualComponent({
         </InfoLine>
 
         <Box significance="distinct" className={Css.footer()}>
-          {`Average rating: ${joke.averageRating} / 5`}
+          {Utils.String.format(lsi.averageRating, joke.averageRating)}
           {canManage && (
             <div>
               <Button
                 icon="mdi-pencil"
                 onClick={handleUpdate}
                 significance="subdued"
-                tooltip="Update"
+                tooltip={lsi.updateTip}
                 disabled={isActionDisabled}
               />
               <Button
                 icon="mdi-delete"
                 onClick={handleDelete}
                 significance="subdued"
-                tooltip="Delete"
+                tooltip={lsi.deleteTip}
                 disabled={isActionDisabled}
               />
             </div>

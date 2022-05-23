@@ -55,10 +55,14 @@ const CreateView = createVisualComponent({
 
       try {
         joke = await props.jokeDataList.handlerMap.create(event.data.value);
-        props.jokeDataList.handlerMap.load();
       } catch (error) {
         console.error(error);
-        showError(error, "Joke creation failed!");
+        addAlert({
+          header: "Joke creation failed!",
+          message: error.message,
+          priority: "error",
+        });
+        return;
       }
 
       addAlert({
@@ -68,6 +72,7 @@ const CreateView = createVisualComponent({
       });
 
       setMode(Mode.BUTTON);
+      props.jokeDataList.handlerMap.load();
     }
     //@@viewOff:private
 

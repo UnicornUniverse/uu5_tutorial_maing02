@@ -1,0 +1,31 @@
+{
+  "UuJokes.Bricks.Joke.CreateForm": {
+    "name": "Name",
+    "text": "Text",
+    "cancel": "Cancel",
+    "submit": "Create joke"
+  },
+  "UuJokes.Bricks.Joke.CreateView": {
+    "createJoke": "Add joke",
+    "createFail": "Joke creation failed!",
+    "createDone": "Joke {0} has been created."
+  },
+  "UuJokes.Bricks.Joke.ListView": {
+    "deleteDone": "The joke {0} has been deleted.",
+    "deleteFail": "Joke delete failed!",
+    "updateFail": "Joke update failed!",
+    "pageLoadFail": "Jokes loading failed!",
+    "loadNext": "Load next 3 jokes"
+  },
+  "UuJokes.Bricks.Joke.Tile": {
+    "averageRating": "Average rating: {0} / 5",
+    "deleteTip": "Delete",
+    "updateTip": "Update"
+  },
+  "UuJokes.Core.RouteBar": {
+    "title": "Lesson 15 - Multilingualism - {0}",
+    "home": "Welcome",
+    "jokes": "Jokes",
+    "about": "About Application"
+  }
+}

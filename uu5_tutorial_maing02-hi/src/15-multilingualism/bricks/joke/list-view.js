@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useRef } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useRef, useLsi } from "uu5g05";
 import { Button, Pending, useAlertBus } from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi";
 import Tile from "./tile";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -37,6 +38,7 @@ const ListView = createVisualComponent({
     //@@viewOn:private
     const { addAlert } = useAlertBus();
     const nextPageIndexRef = useRef(1);
+    const lsi = useLsi(importLsi, [ListView.uu5Tag]);
 
     function showError(error, header = "") {
       addAlert({
@@ -49,15 +51,17 @@ const ListView = createVisualComponent({
     async function handleDelete(jokeDataObject) {
       try {
         await jokeDataObject.handlerMap.delete();
-        addAlert({
-          message: `The joke ${jokeDataObject.data.name} has been deleted.`,
-          priority: "success",
-          durationMs: 2000,
-        });
       } catch (error) {
         console.error(error);
-        showError(error, "Joke delete failed!");
+        showError(error, lsi.deleteFail);
+        return;
       }
+
+      addAlert({
+        message: Utils.String.format(lsi.deleteDone, jokeDataObject.data.name),
+        priority: "success",
+        durationMs: 2000,
+      });
     }
 
     async function handleUpdate(jokeDataObject) {
@@ -65,7 +69,7 @@ const ListView = createVisualComponent({
         await jokeDataObject.handlerMap.update();
       } catch (error) {
         console.error(error);
-        showError(error, "Joke update failed!");
+        showError(error, lsi.updateFail);
       }
     }
 
@@ -75,7 +79,7 @@ const ListView = createVisualComponent({
         nextPageIndexRef.current++;
       } catch (error) {
         console.error(error);
-        showError(error, "Page loading failed!");
+        showError(error, lsi.pageLoadFail);
       }
     }
     //@@viewOff:private
@@ -101,7 +105,7 @@ const ListView = createVisualComponent({
         <div className={Css.buttonArea()}>
           {props.jokeDataList.state !== "pending" && (
             <Button colorScheme="primary" onClick={handleLoadNext}>
-              Load next 3 jokes
+              {lsi.loadNext}
             </Button>
           )}
           {props.jokeDataList.state === "pending" && <Pending />}

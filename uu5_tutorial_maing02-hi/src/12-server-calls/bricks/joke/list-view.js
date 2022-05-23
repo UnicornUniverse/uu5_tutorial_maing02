@@ -43,15 +43,17 @@ const ListView = createVisualComponent({
     async function handleDelete(jokeDataObject) {
       try {
         await jokeDataObject.handlerMap.delete();
-        addAlert({
-          message: `The joke ${jokeDataObject.data.name} has been deleted.`,
-          priority: "success",
-          durationMs: 2000,
-        });
       } catch (error) {
         console.error(error);
         showError(error, "Joke delete failed!");
+        return;
       }
+
+      addAlert({
+        message: `The joke ${jokeDataObject.data.name} has been deleted.`,
+        priority: "success",
+        durationMs: 2000,
+      });
     }
 
     async function handleUpdate(jokeDataObject) {

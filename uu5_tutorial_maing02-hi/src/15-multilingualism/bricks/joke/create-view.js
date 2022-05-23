@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useState } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useState, useLsi } from "uu5g05";
 import { Button, useAlertBus } from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi";
 import CreateForm from "./create-form.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -22,7 +23,7 @@ const Mode = {
 function CreateButton(props) {
   return (
     <Button {...props} colorScheme="primary" significance="highlighted" className={Css.button()}>
-      Create joke
+      {props.children}
     </Button>
   );
 }
@@ -49,25 +50,32 @@ const CreateView = createVisualComponent({
     //@@viewOn:private
     const [mode, setMode] = useState(Mode.BUTTON);
     const { addAlert } = useAlertBus();
+    const lsi = useLsi(importLsi, [CreateView.uu5Tag]);
 
     async function handleSubmit(event) {
       let joke;
 
       try {
         joke = await props.jokeDataList.handlerMap.create(event.data.value);
-        props.jokeDataList.handlerMap.load();
       } catch (error) {
         console.error(error);
-        showError(error, "Joke creation failed!");
+        addAlert({
+          header: lsi.createFail,
+          message: error.message,
+          priority: "error",
+        });
+        return;
       }
 
       addAlert({
-        message: `Joke ${joke.name} has been created.`,
+        message: Utils.String.format(lsi.createDone, joke.name),
         priority: "success",
         durationMs: 2000,
       });
 
       setMode(Mode.BUTTON);
+
+      props.jokeDataList.handlerMap.load();
     }
     //@@viewOff:private
 
@@ -77,7 +85,7 @@ const CreateView = createVisualComponent({
 
     switch (mode) {
       case Mode.BUTTON:
-        content = <CreateButton onClick={() => setMode(Mode.FORM)} />;
+        content = <CreateButton onClick={() => setMode(Mode.FORM)}>{lsi.createJoke}</CreateButton>;
         break;
       default:
         content = <CreateForm onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} />;
