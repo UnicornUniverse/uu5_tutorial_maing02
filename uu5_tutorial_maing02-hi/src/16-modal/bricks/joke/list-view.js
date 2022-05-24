@@ -1,9 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useRef, useLsi } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useRef, useLsi, useState } from "uu5g05";
 import { Button, Pending, useAlertBus } from "uu5g05-elements";
 import importLsi from "../../lsi/import-lsi";
 import Tile from "./tile";
 import Config from "./config/config.js";
+import DetailModal from "./detail-modal";
 //@@viewOff:imports
 
 //@@viewOn:css
@@ -12,6 +13,18 @@ const Css = {
   buttonArea: () => Config.Css.css({ textAlign: "center", marginBottom: 24 }),
 };
 //@@viewOff:css
+
+//@@viewOn:helpers
+function getJokeDataObject(jokeDataList, id) {
+  // HINT: We need to also check newData where are newly created items
+  // that don't meet filtering, sorting or paging criteria.
+  const item =
+    jokeDataList.newData?.find((item) => item?.data.id === id) ||
+    jokeDataList.data.find((item) => item?.data.id === id);
+
+  return item;
+}
+//@@viewOff:helpers
 
 const ListView = createVisualComponent({
   //@@viewOn:statics
@@ -39,6 +52,12 @@ const ListView = createVisualComponent({
     const { addAlert } = useAlertBus();
     const nextPageIndexRef = useRef(1);
     const lsi = useLsi(importLsi, [ListView.uu5Tag]);
+    const [itemDetailData, setItemDetailData] = useState({ open: false, id: undefined });
+    let activeDataObject;
+
+    if (itemDetailData.id) {
+      activeDataObject = getJokeDataObject(props.jokeDataList, itemDetailData.id);
+    }
 
     function showError(error, header = "") {
       addAlert({
@@ -82,6 +101,9 @@ const ListView = createVisualComponent({
         showError(error, lsi.pageLoadFail);
       }
     }
+
+    const handleItemDetailOpen = (jokeDataObject) => setItemDetailData({ open: true, id: jokeDataObject.data.id });
+    const handleItemDetailClose = () => setItemDetailData({ open: false });
     //@@viewOff:private
 
     //@@viewOn:render
@@ -96,6 +118,7 @@ const ListView = createVisualComponent({
             jokeDataObject={item}
             profileList={props.profileList}
             identity={props.identity}
+            onDetail={handleItemDetailOpen}
             onDelete={handleDelete}
             onUpdate={handleUpdate}
             className={Css.tile()}
@@ -110,6 +133,18 @@ const ListView = createVisualComponent({
           )}
           {props.jokeDataList.state === "pending" && <Pending />}
         </div>
+        {itemDetailData.open && activeDataObject && (
+          <DetailModal
+            jokeDataObject={activeDataObject}
+            profileList={props.profileList}
+            identity={props.identity}
+            categoryList={props.categoryList}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+            onClose={handleItemDetailClose}
+            open
+          />
+        )}
       </div>
     );
     //@@viewOff:render

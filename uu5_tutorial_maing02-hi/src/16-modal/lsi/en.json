@@ -10,6 +10,14 @@
     "createFail": "Joke creation failed!",
     "createDone": "Joke {0} has been created."
   },
+  "UuJokes.Bricks.Joke.DetailModal": {
+    "oneVotes": "{0} vote",
+    "fewVotes": "{0} votes",
+    "otherVotes": "{0} votes",
+    "averageRating": "Rating: {0} / 5",
+    "update": "Update",
+    "delete": "Delete"
+  },
   "UuJokes.Bricks.Joke.ListView": {
     "deleteDone": "The joke {0} has been deleted.",
     "deleteFail": "Joke delete failed!",

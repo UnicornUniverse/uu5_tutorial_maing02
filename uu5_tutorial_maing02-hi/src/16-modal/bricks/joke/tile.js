@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useEffect, useLsi } from "uu5g05";
-import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
+import { Box, Text, Button, Pending } from "uu5g05-elements";
 import importLsi from "../../lsi/import-lsi.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -46,36 +46,13 @@ const Css = {
       alignItems: "center",
       justifyContent: "space-between",
       height: 48,
-      marginTop: 8,
       paddingLeft: 16,
       paddingRight: 8,
-    }),
-
-  infoLine: () =>
-    Config.Css.css({
-      display: "block",
-      marginLeft: 16,
-      marginTop: 8,
     }),
 };
 //@@viewOff:css
 
 //@@viewOn:helpers
-function InfoLine({ children }) {
-  return (
-    <Text
-      category="interface"
-      segment="content"
-      type="medium"
-      significance="subdued"
-      colorScheme="building"
-      className={Css.infoLine()}
-    >
-      {children}
-    </Text>
-  );
-}
-
 function hasManagePermission(joke, identity, profileList) {
   const isAuthority = profileList.includes("Authorities");
   const isExecutive = profileList.includes("Executives");
@@ -101,8 +78,6 @@ const Tile = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     categoryList: [],
-    onUpdate: () => {},
-    onDelete: () => {},
   },
   //@@viewOff:defaultProps
 
@@ -121,25 +96,18 @@ const Tile = createVisualComponent({
       }
     }, [props.jokeDataObject]);
 
-    function handleDelete() {
+    function handleDelete(event) {
+      event.stopPropagation();
       props.onDelete(props.jokeDataObject);
     }
 
-    function handleUpdate() {
+    function handleUpdate(event) {
+      event.stopPropagation();
       props.onUpdate(props.jokeDataObject);
     }
 
-    function buildCategoryNames(categoryIdList) {
-      // for faster lookup
-      let categoryIds = new Set(categoryIdList);
-      return props.categoryList
-        .reduce((acc, category) => {
-          if (categoryIds.has(category.id)) {
-            acc.push(category.name);
-          }
-          return acc;
-        }, [])
-        .join(", ");
+    function handleDetail() {
+      props.onDetail(props.jokeDataObject);
     }
     //@@viewOff:private
 
@@ -150,7 +118,7 @@ const Tile = createVisualComponent({
     const isActionDisabled = props.jokeDataObject.state === "pending";
 
     return (
-      <Box {...elementProps}>
+      <Box {...elementProps} onClick={handleDetail}>
         <Text category="interface" segment="title" type="minor" colorScheme="building" className={Css.header()}>
           {joke.name}
         </Text>
@@ -164,16 +132,6 @@ const Tile = createVisualComponent({
           {joke.imageUrl && <img src={joke.imageUrl} alt={joke.name} className={Css.image()} />}
           {joke.image && !joke.imageUrl && <Pending size="xl" />}
         </div>
-
-        <Line significance="subdued" />
-
-        {joke.categoryIdList?.length > 0 && <InfoLine>{buildCategoryNames(joke.categoryIdList)}</InfoLine>}
-
-        <InfoLine>{joke.uuIdentityName}</InfoLine>
-
-        <InfoLine>
-          <DateTime value={joke.sys.cts} dateFormat="short" timeFormat="none" />
-        </InfoLine>
 
         <Box significance="distinct" className={Css.footer()}>
           {Utils.String.format(lsi.averageRating, joke.averageRating)}

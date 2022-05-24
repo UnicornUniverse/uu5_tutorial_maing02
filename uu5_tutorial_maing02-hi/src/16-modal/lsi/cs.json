@@ -10,6 +10,14 @@
     "createFail": "Vytvoření vtipu selhalo!",
     "createDone": "Vtip {0} byl vytvořen."
   },
+  "UuJokes.Bricks.Joke.DetailModal": {
+    "oneVotes": "{0} hlas",
+    "fewVotes": "{0} hlasy",
+    "otherVotes": "{0} hlasů",
+    "averageRating": "Hodnocení: {0} / 5",
+    "update": "Upravit",
+    "delete": "Smazat"
+  },
   "UuJokes.Bricks.Joke.ListView": {
     "deleteDone": "Vtip {0} byl smazán.",
     "deleteFail": "Smazání vtipu selhalo!",
