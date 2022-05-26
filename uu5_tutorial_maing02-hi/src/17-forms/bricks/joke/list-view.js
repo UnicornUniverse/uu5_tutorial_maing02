@@ -5,6 +5,7 @@ import importLsi from "../../lsi/import-lsi";
 import Tile from "./tile";
 import Config from "./config/config.js";
 import DetailModal from "./detail-modal";
+import UpdateModal from "./update-modal";
 //@@viewOff:imports
 
 //@@viewOn:css
@@ -52,11 +53,14 @@ const ListView = createVisualComponent({
     const { addAlert } = useAlertBus();
     const nextPageIndexRef = useRef(1);
     const lsi = useLsi(importLsi, [ListView.uu5Tag]);
-    const [itemDetailData, setItemDetailData] = useState({ open: false, id: undefined });
+    const [detailData, setDetailData] = useState({ open: false, id: undefined });
+    const [updateData, setUpdateData] = useState({ open: false, id: undefined });
+
+    const activeDataObjectId = detailData.id || updateData.id;
     let activeDataObject;
 
-    if (itemDetailData.id) {
-      activeDataObject = getJokeDataObject(props.jokeDataList, itemDetailData.id);
+    if (activeDataObjectId) {
+      activeDataObject = getJokeDataObject(props.jokeDataList, activeDataObjectId);
     }
 
     function showError(error, header = "") {
@@ -84,12 +88,23 @@ const ListView = createVisualComponent({
     }
 
     async function handleUpdate(jokeDataObject) {
+      setUpdateData({ open: true, id: jokeDataObject.data.id });
+    }
+
+    async function handleUpdateSubmit(jokeDataObject, values) {
       try {
-        await jokeDataObject.handlerMap.update();
+        await jokeDataObject.handlerMap.update(values);
       } catch (error) {
         console.error(error);
-        showError(error, lsi.updateFail);
+        showError(error, lsi.updateFail, error);
+        return;
       }
+
+      setUpdateData({ open: false });
+    }
+
+    function handleUpdateCancel() {
+      setUpdateData({ open: false });
     }
 
     async function handleLoadNext() {
@@ -102,8 +117,8 @@ const ListView = createVisualComponent({
       }
     }
 
-    const handleItemDetailOpen = (jokeDataObject) => setItemDetailData({ open: true, id: jokeDataObject.data.id });
-    const handleItemDetailClose = () => setItemDetailData({ open: false });
+    const handleItemDetailOpen = (jokeDataObject) => setDetailData({ open: true, id: jokeDataObject.data.id });
+    const handleItemDetailClose = () => setDetailData({ open: false });
     //@@viewOff:private
 
     //@@viewOn:render
@@ -133,7 +148,7 @@ const ListView = createVisualComponent({
           )}
           {props.jokeDataList.state === "pending" && <Pending />}
         </div>
-        {itemDetailData.open && activeDataObject && (
+        {detailData.open && activeDataObject && (
           <DetailModal
             jokeDataObject={activeDataObject}
             profileList={props.profileList}
@@ -142,6 +157,15 @@ const ListView = createVisualComponent({
             onDelete={handleDelete}
             onUpdate={handleUpdate}
             onClose={handleItemDetailClose}
+            open
+          />
+        )}
+        {updateData.open && (
+          <UpdateModal
+            jokeDataObject={activeDataObject}
+            categoryList={props.categoryList}
+            onSubmit={handleUpdateSubmit}
+            onCancel={handleUpdateCancel}
             open
           />
         )}

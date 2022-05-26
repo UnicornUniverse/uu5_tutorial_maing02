@@ -40,7 +40,13 @@ let Jokes = createVisualComponent({
           {(jokeDataList) => (
             <RouteController routeDataObject={jokeDataList}>
               <div className={Css.container()}>
-                {canCreate && <CreateView jokeDataList={jokeDataList} className={Css.createView()} />}
+                {canCreate && (
+                  <CreateView
+                    jokeDataList={jokeDataList}
+                    categoryList={subAppDataObject.data.categoryList}
+                    className={Css.createView()}
+                  />
+                )}
                 <ListView
                   jokeDataList={jokeDataList}
                   categoryList={subAppDataObject.data.categoryList}

@@ -1,9 +1,12 @@
 {
   "UuJokes.Bricks.Joke.CreateForm": {
     "name": "Název",
+    "category": "Kategorie",
+    "image": "Obrázek",
     "text": "Text",
     "cancel": "Zrušit",
-    "submit": "Vytvořit vtip"
+    "submit": "Vytvořit vtip",
+    "textOrImage": "Text nebo obrázek musí být vyplněn."
   },
   "UuJokes.Bricks.Joke.CreateView": {
     "createJoke": "Přidat vtip",
@@ -17,6 +20,16 @@
     "averageRating": "Hodnocení: {0} / 5",
     "update": "Upravit",
     "delete": "Smazat"
+  },
+  "UuJokes.Bricks.Joke.UpdateModal": {
+    "header": "Upravit vtip",
+    "name": "Název",
+    "category": "Kategorie",
+    "image": "Obrázek",
+    "text": "Text",
+    "cancel": "Zrušit",
+    "submit": "Upravit",
+    "textOrImage": "Text nebo obrázek musí být vyplněn."
   },
   "UuJokes.Bricks.Joke.ListView": {
     "deleteDone": "Vtip {0} byl smazán.",

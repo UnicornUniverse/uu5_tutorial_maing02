@@ -36,13 +36,14 @@ const CreateView = createVisualComponent({
 
   //@@viewOn:propTypes
   propTypes: {
+    categoryList: PropTypes.array,
     onCreate: PropTypes.func,
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
-    onCreate: () => {},
+    categoryList: [],
   },
   //@@viewOff:defaultProps
 
@@ -88,7 +89,9 @@ const CreateView = createVisualComponent({
         content = <CreateButton onClick={() => setMode(Mode.FORM)}>{lsi.createJoke}</CreateButton>;
         break;
       default:
-        content = <CreateForm onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} />;
+        content = (
+          <CreateForm onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} categoryList={props.categoryList} />
+        );
         break;
     }
 

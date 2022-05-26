@@ -48,8 +48,8 @@ export const ListProvider = createComponent({
       return Calls.Joke.create(values);
     }
 
-    async function handleUpdate() {
-      throw new Error("Joke update is not implemented yet.");
+    function handleUpdate(values) {
+      return Calls.Joke.update(values);
     }
 
     function handleDelete(joke) {
