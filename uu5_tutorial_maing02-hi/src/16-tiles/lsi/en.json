@@ -1,0 +1,52 @@
+{
+  "UuJokes.Bricks.Joke.CreateForm": {
+    "name": "Name",
+    "category": "Category",
+    "image": "Image",
+    "text": "Text",
+    "cancel": "Cancel",
+    "submit": "Create joke",
+    "textOrImage": "Text or image must be provided."
+  },
+  "UuJokes.Bricks.Joke.CreateView": {
+    "createJoke": "Add joke",
+    "createFail": "Joke creation failed!",
+    "createDone": "Joke {0} has been created."
+  },
+  "UuJokes.Bricks.Joke.DetailModal": {
+    "oneVotes": "{0} vote",
+    "fewVotes": "{0} votes",
+    "otherVotes": "{0} votes",
+    "averageRating": "Rating: {0} / 5",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "UuJokes.Bricks.Joke.UpdateModal": {
+    "header": "Update joke",
+    "name": "Name",
+    "category": "Category",
+    "image": "Image",
+    "text": "Text",
+    "cancel": "Cancel",
+    "submit": "Update",
+    "textOrImage": "Text or image must be provided."
+  },
+  "UuJokes.Bricks.Joke.ListView": {
+    "deleteDone": "The joke {0} has been deleted.",
+    "deleteFail": "Joke delete failed!",
+    "updateFail": "Joke update failed!",
+    "pageLoadFail": "Jokes loading failed!",
+    "noJokes": "No jokes"
+  },
+  "UuJokes.Bricks.Joke.Tile": {
+    "averageRating": "Average rating: {0} / 5",
+    "deleteTip": "Delete",
+    "updateTip": "Update"
+  },
+  "UuJokes.Core.RouteBar": {
+    "title": "Lesson 16 - Tiles - {0}",
+    "home": "Welcome",
+    "jokes": "Jokes",
+    "about": "About Application"
+  }
+}

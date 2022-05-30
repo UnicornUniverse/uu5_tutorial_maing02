@@ -12,87 +12,87 @@
         "type": "UVE"
       },
       "tutorial/new-project": {
-        "realization": "03-new-project/index.html",
+        "realization": "02-new-project/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/hello-world": {
-        "realization": "04-hello-world/index.html",
+        "realization": "03-hello-world/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/component": {
-        "realization": "05-component/index.html",
+        "realization": "04-component/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/properties": {
-        "realization": "06-properties/index.html",
+        "realization": "05-properties/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/state": {
-        "realization": "07-state/index.html",
+        "realization": "06-state/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/route": {
-        "realization": "08-route/index.html",
+        "realization": "07-route/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/effect": {
-        "realization": "09-effect/index.html",
-        "httpMethod": "GET",
-        "type": "UVE"
-      },
-      "tutorial/responsivity": {
-        "realization": "10-responsivity/index.html",
+        "realization": "08-effect/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/cascading-styles": {
-        "realization": "11-cascading-styles/index.html",
+        "realization": "09-cascading-styles/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/server-calls": {
-        "realization": "12-server-calls/index.html",
+        "realization": "10-server-calls/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/context": {
-        "realization": "13-context/index.html",
+        "realization": "11-context/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/session": {
-        "realization": "14-session/index.html",
+        "realization": "12-session/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/multilingualism": {
-        "realization": "15-multilingualism/index.html",
+        "realization": "13-multilingualism/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/modal": {
-        "realization": "16-modal/index.html",
+        "realization": "14-modal/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/forms": {
-        "realization": "17-forms/index.html",
+        "realization": "15-forms/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/tiles": {
-        "realization": "18-tiles/index.html",
+        "realization": "16-tiles/index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "tutorial/responsivity": {
+        "realization": "17-responsivity/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
       "tutorial/dynamic-rendering": {
-        "realization": "19-dynamic-rendering/index.html",
+        "realization": "18-dynamic-rendering/index.html",
         "httpMethod": "GET",
         "type": "UVE"
       },
