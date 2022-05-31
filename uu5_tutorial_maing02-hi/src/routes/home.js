@@ -12,71 +12,71 @@ import { useSubApp } from "uu_plus4u5g02";
 const lessons = [
   {
     name: "New Project",
-    folder: "03-new-project",
+    folder: "02-new-project",
   },
   {
     name: "Hello World",
-    folder: "04-hello-world",
+    folder: "03-hello-world",
   },
   {
     name: "Component",
-    folder: "05-component",
+    folder: "04-component",
   },
   {
     name: "Properties",
-    folder: "06-properties",
+    folder: "05-properties",
   },
   {
     name: "State",
-    folder: "07-state",
+    folder: "06-state",
   },
   {
     name: "Route",
-    folder: "08-route",
+    folder: "07-route",
   },
   {
     name: "Effect",
-    folder: "09-effect",
-  },
-  {
-    name: "Responsivity",
-    folder: "10-responsivity",
+    folder: "08-effect",
   },
   {
     name: "Cascading Styles",
-    folder: "11-cascading-styles",
+    folder: "09-cascading-styles",
   },
   {
     name: "Server Calls",
-    folder: "12-server-calls",
+    folder: "10-server-calls",
   },
   {
     name: "Context",
-    folder: "13-context",
+    folder: "11-context",
   },
   {
     name: "Session",
-    folder: "14-session",
+    folder: "12-session",
   },
   {
     name: "Multilingualism",
-    folder: "15-multilingualism",
+    folder: "13-multilingualism",
   },
   {
     name: "Modal",
-    folder: "16-modal",
+    folder: "14-modal",
   },
   {
     name: "Forms",
-    folder: "17-forms",
+    folder: "15-forms",
   },
   {
     name: "Tiles",
-    folder: "18-tiles",
+    folder: "16-tiles",
+  },
+  {
+    name: "Responsivity",
+    folder: "17-responsivity",
   },
   {
     name: "Dynamic Rendering",
-    folder: "19-dynamic-rendering",
+    folder: "18-dynamic-rendering",
   },
 ];
 //@@viewOff:constants
@@ -121,7 +121,7 @@ let Home = createVisualComponent({
           <ol>
             {lessons.map((lesson, index) => {
               return (
-                <li key={index} value={3 + index}>
+                <li key={index} value={2 + index}>
                   <Link href={baseUri + "/" + lesson.folder + "/index.html"} target="_blank">
                     {lesson.name}
                   </Link>

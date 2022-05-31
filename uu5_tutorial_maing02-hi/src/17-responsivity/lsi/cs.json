@@ -36,7 +36,7 @@
     "deleteFail": "Smazání vtipu selhalo!",
     "updateFail": "Upravení vtipu selhalo!",
     "pageLoadFail": "Načítání vtipů selhalo!",
-    "loadNext": "Načíst další 3 vtipy"
+    "noJokes": "Žádné vtipy"
   },
   "UuJokes.Bricks.Joke.Tile": {
     "averageRating": "Průměrné hodnocení: {0} / 5",
@@ -44,7 +44,7 @@
     "updateTip": "Upravit"
   },
   "UuJokes.Core.RouteBar": {
-    "title": "Lekce 15 - Formuláře - {0}",
+    "title": "Lekce 17 - Responsivity - {0}",
     "home": "Vítejte",
     "jokes": "Vtipy",
     "about": "O aplikaci"
