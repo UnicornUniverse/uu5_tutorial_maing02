@@ -173,7 +173,7 @@ const Tile = createVisualComponent({
         </InfoLine>
 
         <Box significance="distinct" className={Css.footer()}>
-          {`Average rating: ${joke.averageRating} / 5`}
+          {`Average rating: ${joke.averageRating.toFixed(joke.averageRating % 1 ? 1 : 0)} / 5`}
           {canManage && (
             <div>
               <Button

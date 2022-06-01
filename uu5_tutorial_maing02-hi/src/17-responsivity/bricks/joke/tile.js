@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useEffect, useLsi } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useEffect, useLsi, useUserPreferences } from "uu5g05";
 import { Box, Text, Button, Pending } from "uu5g05-elements";
 import importLsi from "../../lsi/import-lsi.js";
 import Config from "./config/config.js";
@@ -82,6 +82,7 @@ const Tile = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const [preferences] = useUserPreferences();
     const lsi = useLsi(importLsi, [Tile.uu5Tag]);
     const jokeDataObject = props.data;
 
@@ -134,7 +135,13 @@ const Tile = createVisualComponent({
         </div>
 
         <Box significance="distinct" className={Css.footer()}>
-          {Utils.String.format(lsi.averageRating, joke.averageRating)}
+          {Utils.String.format(
+            lsi.averageRating,
+            Utils.Number.format(joke.averageRating.toFixed(joke.averageRating % 1 ? 1 : 0), {
+              groupingSeparator: preferences.numberGroupingSeparater,
+              decimalSeparator: preferences.numberDecimalSeparator,
+            })
+          )}
           {canManage && (
             <div>
               <Button

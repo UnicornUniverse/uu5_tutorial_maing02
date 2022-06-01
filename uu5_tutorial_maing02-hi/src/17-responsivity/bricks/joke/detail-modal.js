@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, PropTypes, useLsi, useLanguage } from "uu5g05";
+import { createVisualComponent, Utils, PropTypes, useLsi, useLanguage, useUserPreferences } from "uu5g05";
 import { Modal, Box, Line, Text, DateTime } from "uu5g05-elements";
 import { PersonPhoto } from "uu_plus4u5g02-elements";
 import importLsi from "../../lsi/import-lsi.js";
@@ -121,6 +121,7 @@ const DetailModal = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const [preferences] = useUserPreferences();
     const [language] = useLanguage();
     const lsi = useLsi(importLsi, [DetailModal.uu5Tag]);
 
@@ -190,7 +191,15 @@ const DetailModal = createVisualComponent({
                 {joke.uuIdentityName}
               </Text>
             </span>
-            <span>{Utils.String.format(lsi.averageRating, joke.averageRating)}</span>
+            <span>
+              {Utils.String.format(
+                lsi.averageRating,
+                Utils.Number.format(joke.averageRating.toFixed(joke.averageRating % 1 ? 1 : 0), {
+                  groupingSeparator: preferences.numberGroupingSeparater,
+                  decimalSeparator: preferences.numberDecimalSeparator,
+                })
+              )}
+            </span>
           </Box>
         </div>
       </Modal>

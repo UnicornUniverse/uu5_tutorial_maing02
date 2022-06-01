@@ -144,7 +144,7 @@ const Tile = createVisualComponent({
         </InfoLine>
 
         <Box significance="distinct" className={Css.footer()}>
-          {`Average rating: ${props.joke.averageRating} / 5`}
+          {`Average rating: ${props.joke.averageRating.toFixed(props.joke.averageRating % 1 ? 1 : 0)} / 5`}
           <div>
             <Button icon="mdi-pencil" onClick={handleUpdate} significance="subdued" tooltip="Update" />
             <Button icon="mdi-delete" onClick={handleDelete} significance="subdued" tooltip="Delete" />
