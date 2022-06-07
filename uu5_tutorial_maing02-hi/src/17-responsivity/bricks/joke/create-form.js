@@ -1,5 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useLsi } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useLsi, ContentSizeProvider } from "uu5g05";
+import { Grid } from "uu5g05-elements";
 import { Form, FormText, FormSelect, FormFile, FormTextArea, SubmitButton, CancelButton } from "uu5g05-forms";
 import importLsi from "../../lsi/import-lsi";
 import Config from "./config/config.js";
@@ -7,8 +8,11 @@ import Config from "./config/config.js";
 
 //@@viewOn:css
 const Css = {
-  input: () => Config.Css.css({ marginBottom: 16 }),
-  controls: () => Config.Css.css({ display: "flex", gap: 8, justifyContent: "flex-end" }),
+  controls: () =>
+    Config.Css.css({
+      display: "flex",
+      gap: 8,
+    }),
 };
 //@@viewOff:css
 
@@ -60,26 +64,44 @@ const CreateForm = createVisualComponent({
     const [elementProps] = Utils.VisualComponent.splitProps(props);
 
     return (
-      <Form {...elementProps} onSubmit={props.onSubmit} onValidate={handleValidate}>
-        <FormText label={lsi.name} name="name" maxLength={255} className={Css.input()} required autoFocus />
+      <ContentSizeProvider>
+        <Form {...elementProps} onSubmit={props.onSubmit} onValidate={handleValidate}>
+          <Grid
+            templateAreas={{
+              xs: "name, categoryIdList, image, text, controls",
+              m: "name name, categoryIdList image, text text, controls controls",
+            }}
+            templateColumns={{ m: "1fr 1fr" }}
+            gap={8}
+          >
+            <Grid.Item gridArea="name">
+              <FormText label={lsi.name} name="name" maxLength={255} required autoFocus />
+            </Grid.Item>
 
-        <FormSelect
-          label={lsi.category}
-          name="categoryIdList"
-          itemList={getCategoryItemList(props.categoryList)}
-          className={Css.input()}
-          multiple
-        />
+            <Grid.Item gridArea="categoryIdList">
+              <FormSelect
+                label={lsi.category}
+                name="categoryIdList"
+                itemList={getCategoryItemList(props.categoryList)}
+                multiple
+              />
+            </Grid.Item>
 
-        <FormFile label={lsi.image} name="image" accept="image/*" className={Css.input()} />
+            <Grid.Item gridArea="image">
+              <FormFile label={lsi.image} name="image" accept="image/*" />
+            </Grid.Item>
 
-        <FormTextArea label={lsi.text} name="text" maxLength={4000} rows={10} className={Css.input()} autoResize />
+            <Grid.Item gridArea="text">
+              <FormTextArea label={lsi.text} name="text" maxLength={4000} rows={10} autoResize />
+            </Grid.Item>
 
-        <div className={Css.controls()}>
-          <CancelButton onClick={props.onCancel}>{lsi.cancel}</CancelButton>
-          <SubmitButton>{lsi.submit}</SubmitButton>
-        </div>
-      </Form>
+            <Grid.Item gridArea="controls" justifySelf="flex-end" className={Css.controls()}>
+              <CancelButton onClick={props.onCancel}>{lsi.cancel}</CancelButton>
+              <SubmitButton>{lsi.submit}</SubmitButton>
+            </Grid.Item>
+          </Grid>
+        </Form>
+      </ContentSizeProvider>
     );
     //@@viewOff:render
   },

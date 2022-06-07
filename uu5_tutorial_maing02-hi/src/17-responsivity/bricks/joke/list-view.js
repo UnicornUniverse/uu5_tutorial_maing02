@@ -142,6 +142,9 @@ const ListView = createVisualComponent({
           onLoad={handleLoadNext}
           rowSpacing={8}
           tileHeight={300}
+          tileMinWidth={400}
+          tileMaxWidth={800}
+          tileSpacing={8}
           emptyStateLabel={lsi.noJokes}
           virtualization
         >
