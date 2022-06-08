@@ -10,46 +10,43 @@ import Config from "./config/config.js";
 const Css = {
   content: () =>
     Config.Css.css({
-      marginTop: -16,
-      marginLeft: -24,
-      marginRight: -24,
-      marginBottom: -16,
+      width: "100%",
     }),
 
   image: () =>
     Config.Css.css({
       display: "block",
-      maxWidth: "100%",
+      width: "100%",
       margin: "auto",
     }),
 
-  text: () =>
+  text: (modal) =>
     Config.Css.css({
       display: "block",
-      marginLeft: 24,
-      marginRight: 24,
-      marginTop: 16,
-      marginBottom: 16,
+      marginLeft: modal.style.paddingLeft,
+      marginRight: modal.style.paddingRight,
+      marginTop: modal.style.paddingTop,
+      marginBottom: modal.style.paddingTop,
     }),
 
-  infoLine: () =>
+  infoLine: (modal) =>
     Config.Css.css({
       display: "block",
-      marginLeft: 24,
+      marginLeft: modal.style.paddingLeft,
       marginTop: 8,
     }),
 
-  footer: () =>
+  footer: (modal) =>
     Config.Css.css({
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
 
       marginTop: 8,
-      paddingTop: 16,
-      paddingBottom: 16,
-      paddingLeft: 24,
-      paddingRight: 24,
+      paddingTop: modal.style.paddingBottom,
+      paddingBottom: modal.style.paddingBottom,
+      paddingLeft: modal.style.paddingLeft,
+      paddingRight: modal.style.paddingRight,
     }),
 
   photo: () =>
@@ -67,17 +64,19 @@ function hasManagePermission(joke, identity, profileList) {
   return isAuthority || (isExecutive && isOwner);
 }
 
-function InfoLine({ children }) {
+function InfoLine(props) {
+  const [elementProps] = Utils.VisualComponent.splitProps(props);
+
   return (
     <Text
+      {...elementProps}
       category="interface"
       segment="content"
       type="medium"
       significance="subdued"
       colorScheme="building"
-      className={Css.infoLine()}
     >
-      {children}
+      {props.children}
     </Text>
   );
 }
@@ -163,45 +162,57 @@ const DetailModal = createVisualComponent({
 
     return (
       <Modal header={joke.name} onClose={props.onClose} open={props.open} actionList={getActions()}>
-        <div className={Css.content()}>
-          {joke.text && (
-            <Text category="interface" segment="content" type="medium" colorScheme="building" className={Css.text()}>
-              {joke.text}
-            </Text>
-          )}
-
-          {joke.imageUrl && <img src={joke.imageUrl} alt={joke.name} className={Css.image()} />}
-
-          <Line significance="subdued" />
-
-          {joke.categoryIdList?.length > 0 && (
-            <InfoLine>{buildCategoryNames(joke.categoryIdList, props.categoryList)}</InfoLine>
-          )}
-
-          <InfoLine>
-            <DateTime value={joke.sys.cts} dateFormat="short" timeFormat="none" />
-          </InfoLine>
-
-          <InfoLine>{Utils.String.format(getRatingCountLsi(joke.ratingCount), joke.ratingCount)}</InfoLine>
-
-          <Box significance="distinct" className={Css.footer()}>
-            <span>
-              <PersonPhoto uuIdentity={joke.uuIdentity} size="xs" className={Css.photo()} />
-              <Text category="interface" segment="content" colorScheme="building" type="medium">
-                {joke.uuIdentityName}
+        {(modal) => (
+          <div className={Css.content()}>
+            {joke.text && (
+              <Text
+                category="interface"
+                segment="content"
+                type="medium"
+                colorScheme="building"
+                className={Css.text(modal)}
+              >
+                {joke.text}
               </Text>
-            </span>
-            <span>
-              {Utils.String.format(
-                lsi.averageRating,
-                Utils.Number.format(joke.averageRating.toFixed(joke.averageRating % 1 ? 1 : 0), {
-                  groupingSeparator: preferences.numberGroupingSeparater,
-                  decimalSeparator: preferences.numberDecimalSeparator,
-                })
-              )}
-            </span>
-          </Box>
-        </div>
+            )}
+
+            {joke.imageUrl && <img src={joke.imageUrl} alt={joke.name} className={Css.image()} />}
+
+            <Line significance="subdued" />
+
+            {joke.categoryIdList?.length > 0 && (
+              <InfoLine className={Css.infoLine(modal)}>
+                {buildCategoryNames(joke.categoryIdList, props.categoryList)}
+              </InfoLine>
+            )}
+
+            <InfoLine className={Css.infoLine(modal)}>
+              <DateTime value={joke.sys.cts} dateFormat="short" timeFormat="none" />
+            </InfoLine>
+
+            <InfoLine className={Css.infoLine(modal)}>
+              {Utils.String.format(getRatingCountLsi(joke.ratingCount), joke.ratingCount)}
+            </InfoLine>
+
+            <Box significance="distinct" className={Css.footer(modal)}>
+              <span>
+                <PersonPhoto uuIdentity={joke.uuIdentity} size="xs" className={Css.photo()} />
+                <Text category="interface" segment="content" colorScheme="building" type="medium">
+                  {joke.uuIdentityName}
+                </Text>
+              </span>
+              <span>
+                {Utils.String.format(
+                  lsi.averageRating,
+                  Utils.Number.format(joke.averageRating.toFixed(joke.averageRating % 1 ? 1 : 0), {
+                    groupingSeparator: preferences.numberGroupingSeparater,
+                    decimalSeparator: preferences.numberDecimalSeparator,
+                  })
+                )}
+              </span>
+            </Box>
+          </div>
+        )}
       </Modal>
     );
     //@@viewOff:render
