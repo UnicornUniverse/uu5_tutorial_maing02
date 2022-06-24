@@ -30,7 +30,7 @@ let jokeList = [
   },
 ];
 
-export const ListProvider = createComponent({
+const ListProvider = createComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "ListProvider",
   //@@viewOff:statics
@@ -61,4 +61,7 @@ export const ListProvider = createComponent({
   },
 });
 
+//@@viewOn:exports
+export { ListProvider };
 export default ListProvider;
+//@@viewOff:exports
