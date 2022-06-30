@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useEffect } from "uu5g05";
+import { createComponent, PropTypes, useEffect } from "uu5g05";
 import Config from "./config/config";
 //@@viewOff:imports
 

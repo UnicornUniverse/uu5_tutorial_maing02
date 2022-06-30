@@ -2,9 +2,8 @@
 import { createVisualComponent, Utils, useLsi, useRoute } from "uu5g05";
 import { useSubAppData } from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
-
-import importLsi from "../lsi/import-lsi";
 import Config from "./config/config.js";
+import importLsi from "../lsi/import-lsi";
 //@@viewOff:imports
 
 const RouteBar = createVisualComponent({

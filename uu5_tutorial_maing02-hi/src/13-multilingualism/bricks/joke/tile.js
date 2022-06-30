@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useEffect, useLsi, useUserPreferences } from "uu5g05";
 import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
-import importLsi from "../../lsi/import-lsi.js";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:css

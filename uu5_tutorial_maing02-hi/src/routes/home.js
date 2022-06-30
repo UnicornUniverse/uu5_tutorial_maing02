@@ -1,11 +1,10 @@
 //@@viewOn:imports
 import { Utils, createVisualComponent } from "uu5g05";
 import { Link } from "uu5g05-elements";
+import { useSubApp } from "uu_plus4u5g02";
 import { withRoute } from "uu_plus4u5g02-app";
-
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar.js";
-import { useSubApp } from "uu_plus4u5g02";
 //@@viewOff:imports
 
 //@@viewOn:constants

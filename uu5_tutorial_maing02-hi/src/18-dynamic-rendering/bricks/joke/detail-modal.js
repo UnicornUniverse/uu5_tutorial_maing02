@@ -2,8 +2,8 @@
 import { createVisualComponent, Utils, PropTypes, useLsi, useLanguage, useUserPreferences } from "uu5g05";
 import { Modal, Box, Line, Text, DateTime } from "uu5g05-elements";
 import { PersonPhoto } from "uu_plus4u5g02-elements";
-import importLsi from "../../lsi/import-lsi.js";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:css

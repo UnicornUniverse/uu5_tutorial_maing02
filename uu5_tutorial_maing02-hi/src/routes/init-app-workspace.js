@@ -1,12 +1,12 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Lsi, useDataObject, Environment, useCall, useLsiValues, useState } from "uu5g05";
+import { createVisualComponent, Utils, Lsi, useDataObject, Environment } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 import Calls from "calls";
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar.js";
-import LSI from "./config/init-app-workspace-lsi.js";
+import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -20,17 +20,11 @@ const Css = {
       maxWidth: 512,
       margin: "auto",
     }),
-  input: () => Config.Css.css({ marginTop: 16 }),
   formControls: () =>
     Config.Css.css({
       marginTop: 24,
       textAlign: "right",
     }),
-  savePending: () =>
-    Config.Css.css({
-      marginRight: 8,
-    }),
-  saveError: () => Config.Css.css({ margin: "0 auto" }),
 };
 //@@viewOff:css
 
@@ -66,14 +60,9 @@ let InitAppWorkspace = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const [nameState, setNameState] = useState({ value: "" });
-    const [uuBtLocationUriState, setUuBtLocationUriState] = useState({ value: "" });
-
-    const routeLsi = useLsiValues(LSI);
     const { state, data, errorData } = useDataObject({
       handlerMap: { load: Calls.loadIdentityProfiles },
     });
-    const { state: saveState, errorData: saveErrorData, call: saveCall } = useCall(save);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -85,7 +74,7 @@ let InitAppWorkspace = createVisualComponent({
     if (state === "error" || state === "errorNoData") {
       child = (
         <Plus4U5App.Error error={errorData?.error}>
-          <Lsi lsi={LSI.notAuthorized} />
+          <Lsi import={importLsi} path={["InitAppWorkspace", "notAuthorized"]} />
         </Plus4U5App.Error>
       );
     } else if (state === "pending" || state === "pendingNoData") {
@@ -94,64 +83,41 @@ let InitAppWorkspace = createVisualComponent({
       if (Array.isArray(data.authorizedProfileList) && data.authorizedProfileList.length > 0) {
         const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
         child = (
-          <div {...attrs} disabled={saveState === "pending" || saveState === "pendingNoData"}>
+          <div {...attrs}>
             <Uu5Elements.Block
               header={
                 <Uu5Elements.Text category="story" segment="heading" type="h2">
-                  <Lsi lsi={LSI.formHeader} />
+                  <Lsi import={importLsi} path={["InitAppWorkspace", "formHeader"]} />
                 </Uu5Elements.Text>
               }
-              info={<Lsi lsi={LSI.formHeaderInfo} />}
+              info={<Lsi import={importLsi} path={["InitAppWorkspace", "formHeaderInfo"]} />}
               collapsible={false}
             >
-              <Uu5Forms.Text
-                required
-                name="uuBtLocationUri"
-                className={Css.input()}
-                label={routeLsi.uuBtLocationUriLabel}
-                tooltip={routeLsi.uuBtLocationUriTooltip}
-                {...uuBtLocationUriState}
-                onChange={(e) => setUuBtLocationUriState({ value: e.data.value })}
-                onError={(e) => {
-                  let { feedback, message, messageParams } = e.data.errorList?.[0] || {};
-                  setUuBtLocationUriState((state) => ({ ...state, feedback, message, messageParams }));
-                }}
-              />
-              <Uu5Forms.Text
-                name="name"
-                className={Css.input()}
-                label={routeLsi.nameLabel}
-                onChange={(e) => setNameState({ value: e.data.value })}
-                onError={(e) => {
-                  let { feedback, message, messageParams } = e.data.errorList?.[0] || {};
-                  setNameState((state) => ({ ...state, feedback, message, messageParams }));
-                }}
-              />
-              <div className={Css.formControls()}>
-                <Uu5Elements.Button
-                  colorScheme="primary"
-                  onClick={() => {
-                    if (uuBtLocationUriState.feedback || !uuBtLocationUriState.value || nameState.feedback) return;
-                    saveCall({ uuBtLocationUri: uuBtLocationUriState.value, name: nameState.value });
-                  }}
-                >
-                  {saveState === "pending" || saveState === "pendingNoData" ? (
-                    <Uu5Elements.Pending size="xs" className={Css.savePending()} />
-                  ) : null}
-                  <Lsi lsi={LSI.initialize} />
-                </Uu5Elements.Button>
-              </div>
-            </Uu5Elements.Block>
+              <Uu5Forms.Form onSubmit={async (e) => save(e.data.value)}>
+                <Uu5Forms.FormText
+                  required
+                  name="uuBtLocationUri"
+                  label={<Lsi import={importLsi} path={["InitAppWorkspace", "uuBtLocationUriLabel"]} />}
+                  info={<Lsi import={importLsi} path={["InitAppWorkspace", "uuBtLocationUriInfo"]} />}
+                />
+                <Uu5Forms.FormText
+                  name="name"
+                  label={<Lsi import={importLsi} path={["InitAppWorkspace", "nameLabel"]} />}
+                />
 
-            {saveState === "error" || saveState === "errorNoData" ? (
-              <Plus4U5App.Error error={saveErrorData?.error} className={Css.saveError()} />
-            ) : null}
+                <div className={Css.formControls()}>
+                  <Uu5Forms.SubmitButton colorScheme="primary">
+                    <Lsi import={importLsi} path={["InitAppWorkspace", "initialize"]} />
+                  </Uu5Forms.SubmitButton>
+                </div>
+              </Uu5Forms.Form>
+            </Uu5Elements.Block>
           </div>
         );
       } else {
         child = (
           <Plus4U5App.Error>
-            <Lsi lsi={LSI.notAuthorizedForInit} />
+            <Lsi import={importLsi} path={["InitAppWorkspace", "notAuthorizedForInit"]} />
           </Plus4U5App.Error>
         );
       }

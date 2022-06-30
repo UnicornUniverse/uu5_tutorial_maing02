@@ -1,9 +1,9 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useState, useLsi } from "uu5g05";
 import { Button, useAlertBus } from "uu5g05-elements";
-import importLsi from "../../lsi/import-lsi";
 import CreateForm from "./create-form.js";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:css

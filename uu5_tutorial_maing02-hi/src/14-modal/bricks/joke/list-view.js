@@ -1,10 +1,10 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useRef, useLsi, useState } from "uu5g05";
 import { Button, Pending, useAlertBus } from "uu5g05-elements";
-import importLsi from "../../lsi/import-lsi";
 import Tile from "./tile";
 import Config from "./config/config.js";
 import DetailModal from "./detail-modal";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:css

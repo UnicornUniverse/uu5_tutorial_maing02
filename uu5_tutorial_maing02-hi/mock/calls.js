@@ -1,5 +1,5 @@
-import Calls from "../src/calls.js";
 import { Client } from "uu_appg01";
+import Calls from "../src/calls.js";
 
 const appAssetsBaseUri = (
   document.baseURI ||

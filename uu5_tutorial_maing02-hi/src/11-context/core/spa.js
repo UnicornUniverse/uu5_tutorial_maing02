@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils } from "uu5g05";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App, { SpaPending } from "uu_plus4u5g02-app";
+import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
@@ -41,7 +41,7 @@ const Spa = createVisualComponent({
   render() {
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
         <JokesProvider>
           {(jokesDataObject) => (
             <>

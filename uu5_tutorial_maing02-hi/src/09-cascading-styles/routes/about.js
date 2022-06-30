@@ -3,7 +3,6 @@ import {
   Utils,
   createVisualComponent,
   Environment,
-  useLsi,
   Lsi,
   DynamicLibraryComponent,
   useSession,
@@ -14,9 +13,9 @@ import { useSubApp, useSystemData } from "uu_plus4u5g02";
 import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
-import LSI from "../config/lsi.js";
 import AboutCfg from "../config/about.js";
 import RouteBar from "../core/route-bar.js";
+import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -78,13 +77,6 @@ const Css = {
 //@@viewOff:css
 
 //@@viewOn:helpers
-function getAuthors(authors) {
-  return authors?.map((author) => {
-    author = { ...author };
-    author.role = author.role && typeof author.role === "object" ? <Lsi lsi={author.role} /> : author.role;
-    return author;
-  });
-}
 //@@viewOff:helpers
 
 let About = createVisualComponent({
@@ -122,20 +114,7 @@ let About = createVisualComponent({
     if (uuAppUserGuideUri) products.push({ baseUri: uuAppUserGuideUri });
     if (uuAppWebKitUri) products.push({ baseUri: uuAppWebKitUri });
 
-    const aboutLsi = AboutCfg.about || {};
-    const licence = AboutCfg.licence || {};
-    const usedTechnologies = AboutCfg.usedTechnologies || {};
-
-    // NOTE Some of these cannot be passed as prop={<Lsi />} therefore we're using useLsi() hook.
-    const about = useLsi(aboutLsi);
-    const organisation = useLsi(licence.organisation);
-    const authorities = useLsi(licence.authorities);
-    const technologies = useLsi(usedTechnologies.technologies);
-    const content = useLsi(usedTechnologies.content);
-
-    const header = useLsi(LSI.about.header);
-    const creatorsHeader = useLsi(LSI.about.creatorsHeader);
-    const termsOfUse = useLsi(LSI.about.termsOfUse);
+    const { leadingAuthors, otherAuthors, license, about, usedTechnologies } = AboutCfg;
 
     const { state } = useDynamicLibraryComponent("Plus4U5.App.About");
     const legacyComponentsReady = !state.startsWith("pending");
@@ -145,20 +124,22 @@ let About = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const leadingAuthors = getAuthors(AboutCfg.leadingAuthors);
-    const otherAuthors = getAuthors(AboutCfg.otherAuthors);
     const attrs = Utils.VisualComponent.getAttrs(props);
     return legacyComponentsReady ? (
       <div {...attrs}>
         <RouteBar />
         <div className={Css.content()}>
-          <DynamicLibraryComponent uu5Tag="Plus4U5.App.About" header={header} content={about} />
+          <DynamicLibraryComponent
+            uu5Tag="Plus4U5.App.About"
+            header={<Lsi import={importLsi} path={["About", "header"]} />}
+            content={about}
+          />
           {sessionState === "authenticated" ? (
             <DynamicLibraryComponent
               uu5Tag="Plus4U5.App.Support"
               uuFlsUri={uuAppUuFlsBaseUri}
               uuSlsUri={uuAppUuSlsBaseUri}
-              productCode="support/uu5Tutorial"
+              productCode="support/uuJokes"
               productPortalUri={uuAppProductPortalUri}
             />
           ) : null}
@@ -166,18 +147,18 @@ let About = createVisualComponent({
             <DynamicLibraryComponent uu5Tag="UuProductCatalogue.Bricks.ProductList" type="16x9" products={products} />
           ) : null}
           <div className={Css.common()}>
-            <div>{`uu5Tutorial ${Environment.appVersion}`}</div>
-            {licence.termsOfUse && (
+            <div>{`uuJokes ${Environment.appVersion}`}</div>
+            {license.termsOfUse && (
               <div>
-                <Uu5Elements.Link href={licence.termsOfUse} target="_blank">
-                  {termsOfUse}
+                <Uu5Elements.Link href={license.termsOfUse} target="_blank">
+                  <Lsi import={importLsi} path={["About", "termsOfUse"]} />
                 </Uu5Elements.Link>
               </div>
             )}
           </div>
           <DynamicLibraryComponent
             uu5Tag="Plus4U5.App.Authors"
-            header={creatorsHeader}
+            header={<Lsi import={importLsi} path={["About", "creatorsHeader"]} />}
             leadingAuthors={leadingAuthors}
             otherAuthors={otherAuthors}
           />
@@ -185,8 +166,8 @@ let About = createVisualComponent({
             <div>
               <DynamicLibraryComponent
                 uu5Tag="Plus4U5.App.Technologies"
-                technologies={technologies}
-                content={content}
+                technologies={usedTechnologies.technologies}
+                content={usedTechnologies.content}
                 textAlign="left"
                 className={Css.technologies()}
               />
@@ -194,8 +175,8 @@ let About = createVisualComponent({
             <div>
               <DynamicLibraryComponent
                 uu5Tag="Plus4U5.App.Licence"
-                organisation={organisation}
-                authorities={authorities}
+                organisation={license.organisation}
+                authorities={license.authorities}
                 awid={<Uu5Elements.Link href={Environment.appBaseUri}>{awid}</Uu5Elements.Link>}
                 textAlign="left"
                 className={Css.license()}

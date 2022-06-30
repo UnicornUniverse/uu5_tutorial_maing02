@@ -24,11 +24,11 @@ const Tile = createVisualComponent({
     return (
       <Box style={{ width: 640, margin: "24px auto" }}>
         <Text category="interface" segment="title" type="minor" colorScheme="building">
-          New Years' resolution
+          New Years&apos; resolution
         </Text>
         <div>
           <Text category="interface" segment="content" type="medium" colorScheme="building">
-            My New Years' resolution is 8K.
+            My New Years&apos; resolution is 8K.
           </Text>
         </div>
         <div>

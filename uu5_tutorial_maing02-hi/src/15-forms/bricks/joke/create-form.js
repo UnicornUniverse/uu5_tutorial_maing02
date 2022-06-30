@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useLsi } from "uu5g05";
 import { Form, FormText, FormSelect, FormFile, FormTextArea, SubmitButton, CancelButton } from "uu5g05-forms";
-import importLsi from "../../lsi/import-lsi";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:css

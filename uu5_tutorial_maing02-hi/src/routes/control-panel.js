@@ -5,8 +5,8 @@ import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 import Calls from "calls";
 
 import Config from "./config/config.js";
-import LSI from "../config/lsi.js";
 import RouteBar from "../core/route-bar.js";
+import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -46,7 +46,7 @@ let ControlPanel = createVisualComponent({
     if (state === "error" || state === "errorNoData") {
       child = (
         <Plus4U5App.Error error={errorData?.error}>
-          <Lsi lsi={LSI.controlPanel.rightsError} />
+          <Lsi import={importLsi} path={["ControlPanel", "rightsError"]} />
         </Plus4U5App.Error>
       );
     } else if (state === "pending" || state === "pendingNoData") {
@@ -70,7 +70,7 @@ let ControlPanel = createVisualComponent({
     } else {
       child = (
         <Uu5Elements.HighlightedBox icon="mdi-alert-circle" colorScheme="negative">
-          <Lsi lsi={LSI.controlPanel.btNotConnected} />
+          <Lsi import={importLsi} path={["ControlPanel", "btNotConnected"]} />
         </Uu5Elements.HighlightedBox>
       );
     }

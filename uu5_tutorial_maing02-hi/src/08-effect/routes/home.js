@@ -5,9 +5,9 @@ import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
-import LSI from "../config/lsi.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
+import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -54,7 +54,7 @@ let Home = createVisualComponent({
         <RouteBar />
         <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
           <Uu5Elements.Text category="story" segment="heading" type="h2">
-            <Lsi lsi={LSI.auth.welcome} />
+            <Lsi import={importLsi} path={["Home", "welcome"]} />
           </Uu5Elements.Text>
           {identity && (
             <Uu5Elements.Text category="story" segment="heading" type="h2">
@@ -64,17 +64,17 @@ let Home = createVisualComponent({
         </WelcomeRow>
         <WelcomeRow left={<Uu5Elements.Icon icon="mdi-human-greeting" className={Css.icon()} />}>
           <Uu5Elements.Text category="story" segment="body" type="common">
-            <Lsi lsi={LSI.auth.intro} />
+            <Lsi import={importLsi} path={["Home", "intro"]} />
           </Uu5Elements.Text>
         </WelcomeRow>
         <WelcomeRow left={<Uu5Elements.Icon icon="mdi-monitor" className={Css.icon()} />}>
           <Uu5Elements.Text category="story" segment="body" type="common">
-            <Lsi lsi={LSI.auth.clientSide} />
+            <Lsi import={importLsi} path={["Home", "clientSide"]} />
           </Uu5Elements.Text>
         </WelcomeRow>
         <WelcomeRow left={<Uu5Elements.Icon icon="mdi-server" className={Css.icon()} />}>
           <Uu5Elements.Text category="story" segment="body" type="common">
-            <Lsi lsi={LSI.auth.serverSide} />
+            <Lsi import={importLsi} path={["Home", "serverSide"]} />
           </Uu5Elements.Text>
         </WelcomeRow>
       </div>
