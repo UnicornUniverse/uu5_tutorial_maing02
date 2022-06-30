@@ -49,7 +49,7 @@ const ListView = createVisualComponent({
           durationMs: 2000,
         });
       } catch (error) {
-        console.error(error);
+        ListView.logger.error("Error deleting joke", error);
         showError(error, "Joke delete failed!");
       }
     }
@@ -58,7 +58,7 @@ const ListView = createVisualComponent({
       try {
         props.onUpdate(event.data);
       } catch (error) {
-        console.error(error);
+        ListView.logger.error("Error updating joke", error);
         showError(error, "Joke update failed!");
       }
     }

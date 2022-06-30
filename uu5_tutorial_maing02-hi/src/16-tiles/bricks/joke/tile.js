@@ -93,7 +93,9 @@ const Tile = createVisualComponent({
         jokeDataObject.state === "ready" &&
         jokeDataObject.handlerMap?.getImage
       ) {
-        jokeDataObject.handlerMap.getImage(jokeDataObject.data).catch((error) => console.error(error));
+        jokeDataObject.handlerMap
+          .getImage(jokeDataObject.data)
+          .catch((error) => Tile.logger.error("Error loading image", error));
       }
     }, [jokeDataObject]);
 

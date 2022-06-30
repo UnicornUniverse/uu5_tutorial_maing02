@@ -56,7 +56,7 @@ const CreateView = createVisualComponent({
       try {
         joke = await props.jokeDataList.handlerMap.create(event.data.value);
       } catch (error) {
-        console.error(error);
+        CreateView.logger.error("Error while creating joke", error);
         addAlert({
           header: "Joke creation failed!",
           message: error.message,

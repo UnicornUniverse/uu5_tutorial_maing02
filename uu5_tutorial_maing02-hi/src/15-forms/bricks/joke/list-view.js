@@ -75,7 +75,7 @@ const ListView = createVisualComponent({
       try {
         await jokeDataObject.handlerMap.delete();
       } catch (error) {
-        console.error(error);
+        ListView.logger.error("Error deleting joke", error);
         showError(error, lsi.deleteFail);
         return;
       }
@@ -95,7 +95,7 @@ const ListView = createVisualComponent({
       try {
         await jokeDataObject.handlerMap.update(values);
       } catch (error) {
-        console.error(error);
+        ListView.logger.error("Error updating joke", error);
         showError(error, lsi.updateFail, error);
         return;
       }
@@ -112,7 +112,7 @@ const ListView = createVisualComponent({
         await props.jokeDataList.handlerMap.loadNext({ pageIndex: nextPageIndexRef.current, pageSize: 3 });
         nextPageIndexRef.current++;
       } catch (error) {
-        console.error(error);
+        ListView.logger.error("Error loading next page", error);
         showError(error, lsi.pageLoadFail);
       }
     }
