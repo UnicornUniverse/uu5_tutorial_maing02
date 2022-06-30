@@ -93,14 +93,13 @@ const Tile = createVisualComponent({
         cts: PropTypes.string,
       }),
     }).isRequired,
-    onUpdate: UU5.PropTypes.func,
-    onDelete: UU5.PropTypes.func,
+    onUpdate: PropTypes.func,
+    onDelete: PropTypes.func,
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
-    joke: null,
     onUpdate: () => {},
     onDelete: () => {},
   },
