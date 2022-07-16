@@ -105,12 +105,11 @@ const ListView = createVisualComponent({
     }
 
     async function handleLoadNext({ indexFrom }) {
-      const pageSize = props.jokeDataList.pageSize;
-
       try {
         await props.jokeDataList.handlerMap.loadNext({
-          pageSize: pageSize,
-          pageIndex: Math.floor(indexFrom / pageSize),
+          pageInfo: {
+            pageIndex: Math.floor(indexFrom / props.jokeDataList.pageSize),
+          },
         });
         nextPageIndexRef.current++;
       } catch (error) {

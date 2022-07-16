@@ -73,7 +73,7 @@ const ListView = createVisualComponent({
 
     async function handleLoadNext() {
       try {
-        await props.jokeDataList.handlerMap.loadNext({ pageIndex: nextPageIndexRef.current, pageSize: 3 });
+        await props.jokeDataList.handlerMap.loadNext({ pageInfo: { pageIndex: nextPageIndexRef.current } });
         nextPageIndexRef.current++;
       } catch (error) {
         ListView.logger.error("Error loading next page", error);

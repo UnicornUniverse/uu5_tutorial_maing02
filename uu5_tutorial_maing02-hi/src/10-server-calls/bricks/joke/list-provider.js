@@ -30,17 +30,16 @@ const ListProvider = createComponent({
         delete: handleDelete,
         getImage: handleGetImage,
       },
+      pageSize: 3,
     });
 
     const imageUrlListRef = useRef([]);
 
-    function handleLoad() {
-      const dtoIn = { pageInfo: { pageSize: 3 } };
+    function handleLoad(dtoIn) {
       return Calls.Joke.list(dtoIn);
     }
 
-    function handleLoadNext(pageInfo) {
-      const dtoIn = { pageInfo };
+    function handleLoadNext(dtoIn) {
       return Calls.Joke.list(dtoIn);
     }
 

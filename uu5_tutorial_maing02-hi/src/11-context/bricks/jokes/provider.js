@@ -27,7 +27,7 @@ export const Provider = createComponent({
     });
 
     async function handleLoad() {
-      return Calls.Jokes.load({}, props.baseUri);
+      return Calls.Jokes.load();
     }
     //@@viewOff:private
 

@@ -59,8 +59,8 @@ const Calls = {
   },
 
   Jokes: {
-    load(dtoIn, baseUri) {
-      const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load", baseUri);
+    load(dtoIn) {
+      const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load");
       return Calls.call("get", commandUri, dtoIn);
     },
   },
