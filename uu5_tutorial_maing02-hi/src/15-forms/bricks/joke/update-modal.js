@@ -30,7 +30,6 @@ export const UpdateModal = createVisualComponent({
   propTypes: {
     jokeDataObject: PropTypes.object.isRequired,
     categoryList: PropTypes.array.isRequired,
-    open: PropTypes.bool,
     onSubmit: PropTypes.func,
     onCancel: PropTypes.func,
   },
@@ -39,7 +38,6 @@ export const UpdateModal = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     categoryList: [],
-    open: false,
   },
   //@@viewOff:defaultProps
 
@@ -81,7 +79,7 @@ export const UpdateModal = createVisualComponent({
 
     return (
       <Form.Provider onSubmit={handleSubmit} onValidate={handleValidate}>
-        <Modal header={lsi.header} open={props.open} footer={formControls}>
+        <Modal header={lsi.header} footer={formControls} open>
           <Form.View>
             <FormText
               label={lsi.name}

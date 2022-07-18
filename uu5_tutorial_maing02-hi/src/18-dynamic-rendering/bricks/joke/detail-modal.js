@@ -105,7 +105,6 @@ const DetailModal = createVisualComponent({
   propTypes: {
     jokeDataObject: PropTypes.object.isRequired,
     categoryList: PropTypes.array,
-    open: PropTypes.bool,
     onClose: PropTypes.func,
     onUpdate: PropTypes.func,
     onDelete: PropTypes.func,
@@ -115,7 +114,6 @@ const DetailModal = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     categoryList: [],
-    open: false,
   },
   //@@viewOff:defaultProps
 
@@ -162,7 +160,7 @@ const DetailModal = createVisualComponent({
     const joke = props.jokeDataObject.data;
 
     return (
-      <Modal header={joke.name} onClose={props.onClose} open={props.open} actionList={getActions()}>
+      <Modal header={joke.name} onClose={props.onClose} actionList={getActions()} open>
         <div className={Css.content()}>
           {joke.text && (
             <Text category="interface" segment="content" type="medium" colorScheme="building" className={Css.text()}>
