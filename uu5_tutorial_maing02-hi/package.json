@@ -16,10 +16,15 @@
     "uu5g05-elements": "^1.0.0",
     "uu5g05-forms": "^1.0.0",
     "uu5loaderg01": "^1.0.0",
-    "uu5tilesg02": "^1.20.0"
+    "uu5tilesg02": "^2.0.0",
+    "uu5tilesg02-elements": "^2.0.0"
   },
   "uuBuildSettings": {
-    "externals": {}
+    "externals": {
+      "prop-types": {
+        "cdnBaseUri": "https://cdn.plus4u.net/libs/prop-types/15.7.2/"
+      }
+    }
   },
   "devDependencies": {
     "uu_appg01_devkit": "^5.0.0",

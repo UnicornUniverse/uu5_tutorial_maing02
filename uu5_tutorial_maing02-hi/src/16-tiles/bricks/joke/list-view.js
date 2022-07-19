@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useLsi, useState } from "uu5g05";
 import { useAlertBus } from "uu5g05-elements";
-import { Grid } from "uu5tilesg02";
+import { Grid } from "uu5tilesg02-elements";
 import Tile from "./tile";
 import Config from "./config/config.js";
 import DetailModal from "./detail-modal";
@@ -137,10 +137,9 @@ const ListView = createVisualComponent({
         <Grid
           data={props.jokeDataList.data}
           onLoad={handleLoadNext}
-          rowSpacing={8}
+          verticalGap={8}
           tileHeight={300}
-          emptyStateLabel={lsi.noJokes}
-          virtualization
+          emptyState={lsi.noJokes}
         >
           <Tile {...tileProps} />
         </Grid>
