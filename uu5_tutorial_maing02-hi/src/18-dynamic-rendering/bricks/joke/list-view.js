@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useRef, useLsi, useState } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useLsi, useState } from "uu5g05";
 import { useAlertBus } from "uu5g05-elements";
 import { Grid } from "uu5tilesg02-elements";
 import Tile from "./tile";
@@ -48,7 +48,6 @@ const ListView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { addAlert } = useAlertBus();
-    const nextPageIndexRef = useRef(1);
     const lsi = useLsi(importLsi, [ListView.uu5Tag]);
     const [detailData, setDetailData] = useState({ open: false, id: undefined });
     const [updateData, setUpdateData] = useState({ open: false, id: undefined });
@@ -111,7 +110,6 @@ const ListView = createVisualComponent({
             pageIndex: Math.floor(indexFrom / props.jokeDataList.pageSize),
           },
         });
-        nextPageIndexRef.current++;
       } catch (error) {
         ListView.logger.error("Error loading next page", error);
         showError(error, lsi.pageLoadFail);
