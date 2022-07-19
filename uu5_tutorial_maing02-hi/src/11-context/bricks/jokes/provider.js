@@ -22,13 +22,9 @@ export const Provider = createComponent({
     //@@viewOn:private
     const jokesDataObject = useDataObject({
       handlerMap: {
-        load: handleLoad,
+        load: Calls.Jokes.load,
       },
     });
-
-    async function handleLoad() {
-      return Calls.Jokes.load();
-    }
     //@@viewOff:private
 
     //@@viewOn:render
