@@ -1,43 +1,43 @@
 {
-  "appName": "Application uuJokes",
+  "appName": "Додаток uuJokes",
   "About": {
-    "header": "About application uuJokes",
-    "creatorsHeader": "Application creators",
-    "termsOfUse": "Terms of use"
+    "header": "Про додаток uuJokes",
+    "creatorsHeader": "Творці додатку",
+    "termsOfUse": "Умови використання"
   },
   "AboutContent": {
-    "content": "<uu5string/>Demo application is a template for developing new applications.",
-    "technologiesContent": "<uu5string/>Other used technologies: <Uu5Elements.Link href='http://www.w3schools.com/html/default.asp' target='_blank'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/css/default.asp' target='_blank'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/js/default.asp' target='_blank'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href='http://getbootstrap.com' target='_blank'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href='https://reactjs.org' target='_blank'>React</Uu5Elements.Link>, <Uu5Elements.Link href='https://www.ruby-lang.org' target='_blank'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href='http://puma.io' target='_blank'>Puma</Uu5Elements.Link> a <Uu5Elements.Link href='https://www.docker.com' target='_blank'>Docker</Uu5Elements.Link>. Application is operated in the <Uu5Elements.Link href='https://plus4u.net' target='_blank'>Plus4U</Uu5Elements.Link> internet service with the usage of <Uu5Elements.Link href='https://azure.microsoft.com' target='_blank'>Microsoft Azure</Uu5Elements.Link> cloud."
+    "content": "<uu5string/>Демо-додаток — це шаблон для розробки нових додатків.",
+    "technologiesContent": "<uu5string/>Інші використовувані технології: <Uu5Elements.Link href='http://www.w3schools.com/html/default.asp' target='_blank'>Html5</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/css/default.asp' target='_blank'>CSS</Uu5Elements.Link>, <Uu5Elements.Link href='http://www.w3schools.com/js/default.asp' target='_blank'>JavaScript</Uu5Elements.Link>, <Uu5Elements.Link href='http://getbootstrap.com' target='_blank'>Bootstrap</Uu5Elements.Link>, <Uu5Elements.Link href='https://reactjs.org' target='_blank'>React</Uu5Elements.Link>, <Uu5Elements.Link href='https://www.ruby-lang.org' target='_blank'>Ruby</Uu5Elements.Link>, <Uu5Elements.Link href='http://puma.io' target='_blank'>Puma</Uu5Elements.Link> a <Uu5Elements.Link href='https://www.docker.com' target='_blank'>Docker</Uu5Elements.Link>. Додаток працює в <Uu5Elements.Link href='https://plus4u.net' target='_blank'>Plus4U</Uu5Elements.Link> інтернет-сервісі з використанням <Uu5Elements.Link href='https://azure.microsoft.com' target='_blank'>Microsoft Azure</Uu5Elements.Link> хмари."
   },
   "ControlPanel": {
-    "rightsError": "You do not have sufficient rights to display this component.",
-    "btNotConnected": "The application is not connected to a Business Territory."
+    "rightsError": "Ви не маєте достатніх прав для відображення цього компонента.",
+    "btNotConnected": "Додаток не підключений до бізнес-території."
   },
   "Home": {
-    "welcome": "Welcome",
-    "intro": "<uu5string/>This template consist of prepared client and server side. Shown components demonstrate possibilities and way of using. For application developing purposes they are suitable for modifying, copying and deleting. More about uuApp Structure see documentation&nbsp; <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuAppDevKit</Uu5Elements.Link>.",
-    "clientSide": "<uu5string/>Libraries <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\" target=\"_blank\">uu5</Uu5Elements.Link> and <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\" target=\"_blank\">uuPlus4U5</Uu5Elements.Link> are used for developing of client side.",
-    "serverSide": "<uu5string/>It is necessary to initialize application workspace for running server side. See manual <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuApp Template Developer Guide</Uu5Elements.Link>"
+    "welcome": "Ласкаво просимо",
+    "intro": "<uu5string/>Цей шаблон складається з підготовленої сторони клієнта та сервера. Показані компоненти демонструють можливості та спосіб використання. Для цілей розробки додатків вони підходять для модифікації, копіювання та видалення. Докладніше про Структуру uuApp дивіться в документації&nbsp; <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuAppDevKit</Uu5Elements.Link>.",
+    "clientSide": "<uu5string/>Бібліотеки <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/05ecbf4e8bca405290b1a6d4cee8813a/book\" target=\"_blank\">uu5</Uu5Elements.Link> та <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/83c1406c4fc541dba975941424106318/book\" target=\"_blank\">uuPlus4U5</Uu5Elements.Link> використовуються для розробки клієнтської частини",
+    "serverSide": "<uu5string/>Необхідно ініціалізувати робочий простір додатку для роботи на стороні сервера. Див. посібник <Uu5Elements.Link href=\"https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book/page?code=stepByStepApp\" target=\"_blank\">uuApp Template Developer Guide</Uu5Elements.Link>"
   },
   "InitAppWorkspace": {
-    "notAuthorized": "You do not have sufficient rights to use the application.",
-    "formHeader": "Initialize uuApp",
-    "formHeaderInfo": "<uu5string/>Your uuApp is running, but requires initialization. If you need help with filling up this form, see\n<Uu5Elements.Link target=\"_blank\" href=\"#\">Documentation</Uu5Elements.Link>.",
-    "notAuthorizedForInit": "The application is running but it was not initialized yet and you do not have sufficient rights to do so.",
-    "uuBtLocationUriLabel": "uuBusinessTerritory location",
-    "uuBtLocationUriInfo": "Uri of the uuBt location where AWSC will be created",
-    "nameLabel": "Name",
-    "initialize": "Initialize"
+    "notAuthorized": "Ви не маєте достатніх прав для використання додатку.",
+    "formHeader": "Ініціалізувати uuApp",
+    "formHeaderInfo": "<uu5string/>Ваш uuApp працює, але вимагає ініціалізації. Якщо вам потрібна допомога із заповненням цієї форми, дивіться\n<Uu5Elements.Link target=\"_blank\" href=\"#\">Документацію</Uu5Elements.Link>.",
+    "notAuthorizedForInit": "Додаток запущений, але його ще не ініціалізовано, і ви не маєте для цього достатніх прав.",
+    "uuBtLocationUriLabel": "розташування uuBusinessTerritory",
+    "uuBtLocationUriInfo": "Uri розташування на uuBt, де буде створено AWSC",
+    "nameLabel": "Назва",
+    "initialize": "Ініціалізувати"
   },
   "UuJokes.Bricks.Joke.CreateForm": {
-    "name": "Ім'я",
+    "name": "Назва",
     "text": "Текст",
     "cancel": "Скасувати",
-    "submit": "Створіть жарт"
+    "submit": "Створити жарт"
   },
   "UuJokes.Bricks.Joke.CreateView": {
-    "createJoke": "Додайте жарт",
-    "createFail": "Не вдалося створити анекдот!",
+    "createJoke": "Додати жарт",
+    "createFail": "Не вдалося створити жарт!",
     "createDone": "Жарт {0} створено."
   },
   "UuJokes.Bricks.Joke.ListView": {
@@ -56,6 +56,6 @@
     "title": "Урок 15 – Багатомовність – {0}",
     "home": "ласкаво просимо",
     "jokes": "жарти",
-    "about": "Про застосування"
+    "about": "Про Додаток"
   }
 }
