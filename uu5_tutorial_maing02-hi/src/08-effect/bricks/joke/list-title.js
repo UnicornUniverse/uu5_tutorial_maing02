@@ -10,7 +10,7 @@ const ListTitle = createComponent({
 
   //@@viewOn:propTypes
   propTypes: {
-    jokeList: PropTypes.array.isRequired,
+    jokeList: PropTypes.array,
   },
   //@@viewOff:propTypes
 
