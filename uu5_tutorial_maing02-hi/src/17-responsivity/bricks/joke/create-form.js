@@ -61,7 +61,7 @@ const CreateForm = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:render
-    const [elementProps] = Utils.VisualComponent.splitProps(props);
+    const { elementProps } = Utils.VisualComponent.splitProps(props);
 
     return (
       <ContentSizeProvider>
