@@ -39,8 +39,7 @@ const ListProvider = createComponent({
       return Calls.Joke.list(dtoIn);
     }
 
-    function handleLoadNext(pageInfo) {
-      const dtoIn = { pageInfo };
+    function handleLoadNext(dtoIn) {
       return Calls.Joke.list(dtoIn);
     }
 
