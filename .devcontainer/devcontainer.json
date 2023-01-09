@@ -1,0 +1,23 @@
+{
+  "name": "uu5_tutorial_maing02",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:16",
+  "forwardPorts": [1234],
+  "mounts": [
+    "source=uu5_tutorial_maing02-hi-node_modules,target=${containerWorkspaceFolder}/uu5_tutorial_maing02-hi/node_modules,type=volume",
+    "source=uu5_tutorial_maing02-server-node_modules,target=${containerWorkspaceFolder}/uu5_tutorial_maing02-server/node_modules,type=volume"
+  ],
+  "postCreateCommand": "sudo chown node:node -R ./",
+  "remoteEnv": {
+    "DEV_CHROME_DIR": "${localEnv:DEV_CHROME_DIR}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "mhutchie.git-graph",
+        "eamodio.gitlens"
+      ]
+    }
+  }
+}
