@@ -65,7 +65,7 @@ function hasManagePermission(joke, identity, profileList) {
 }
 
 function InfoLine(props) {
-  const [elementProps] = Utils.VisualComponent.splitProps(props);
+  const { elementProps } = Utils.VisualComponent.splitProps(props);
 
   return (
     <Text

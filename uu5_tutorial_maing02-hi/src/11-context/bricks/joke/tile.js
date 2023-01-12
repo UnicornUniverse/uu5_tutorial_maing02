@@ -136,7 +136,7 @@ const Tile = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:render
-    const [elementProps] = Utils.VisualComponent.splitProps(props, Css.main());
+    const { elementProps } = Utils.VisualComponent.splitProps(props, Css.main());
     const joke = props.jokeDataObject.data;
     const isActionDisabled = props.jokeDataObject.state === "pending";
 

@@ -57,7 +57,7 @@ const CreateForm = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:render
-    const [elementProps] = Utils.VisualComponent.splitProps(props);
+    const { elementProps } = Utils.VisualComponent.splitProps(props);
 
     return (
       <Form {...elementProps} onSubmit={props.onSubmit} onValidate={handleValidate}>
