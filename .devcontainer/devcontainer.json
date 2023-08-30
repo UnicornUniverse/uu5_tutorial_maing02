@@ -1,6 +1,7 @@
 {
   "name": "uu5_tutorial_maing02",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:16",
+  "runArgs": ["--name=uu5_tutorial_maing02"],
   "forwardPorts": [1234],
   "mounts": [
     "source=uu5_tutorial_maing02-hi-node_modules,target=${containerWorkspaceFolder}/uu5_tutorial_maing02-hi/node_modules,type=volume",
