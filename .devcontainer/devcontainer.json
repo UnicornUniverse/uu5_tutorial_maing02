@@ -9,7 +9,8 @@
   ],
   "postCreateCommand": "sudo chown node:node -R ./",
   "remoteEnv": {
-    "DEV_CHROME_DIR": "${localEnv:DEV_CHROME_DIR}"
+    "DEV_CHROME_DIR": "${localEnv:DEV_CHROME_DIR}",
+    "WATCHPACK_POLLING": "true"
   },
   "customizations": {
     "vscode": {
