@@ -22,8 +22,8 @@ let jokeList = [
   },
   {
     id: Utils.String.generateId(),
-    name: "Random image",
-    imageUrl: "https://placeimg.com/640/320/any",
+    name: "Joke with image",
+    imageUrl: "https://picsum.photos/id/164/640/320",
     averageRating: 1,
     uuIdentityName: "Bart Simpson",
     sys: { cts: "2021-02-14T10:48:38.990Z" },

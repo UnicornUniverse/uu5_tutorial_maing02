@@ -32,7 +32,7 @@ const Tile = createVisualComponent({
           </Text>
         </div>
         <div>
-          <img src="https://placeimg.com/640/320/any" />
+          <img src="https://picsum.photos/id/164/640/320" />
         </div>
         <Line significance="subdued" />
         <div>
